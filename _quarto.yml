@@ -2,7 +2,7 @@ project:
   type: website
   output-dir: docs
   resources:
-    - assets/Joshua-Hyatt-Resume.pdf
+    - "assets"
   
 website:
   site-url: "https://joshuacharleshyatt.github.io/personal/"

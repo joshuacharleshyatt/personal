@@ -16,7 +16,7 @@ about:
       url: "mailto:joshuacharleshyatt@gmail.com"
     - text: PDF
       icon: file-earmark-pdf
-      url: "assets/Joshua-Hyatt-Resume.pdf"
+      url: "Joshua-Hyatt-Resume.pdf"
 format:
   html:
     toc: true

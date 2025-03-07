@@ -1,20 +1,26 @@
 ---
 title: Joshua Hyatt
-image: profile.jpg
+image: assets/profile.jpg
 about:
   template: jolla
   links:
     - text: LinkedIn
+      icon: linkedin
       url: "https://www.linkedin.com/in/joshuachyatt/"
     - text: GitHub
       icon: github
       url: "https://github.com/joshuacharleshyatt"
     - text: Email
-      url: "mailto:joshuacharleshyatt@gmail.com"
+      icon: envelope
+      url: "mailto:joshuacharleshyatt@gmail.com" 
+    - text: Resume
+      icon: file-earmark-pdf
+      url: "assets/Joshua-Hyatt-Resume.pdf"
 comments: false
 ---
 
 ## About Me
 
 I have more than 5 years of experience working as a Data Scientist and many more years developing technical solutions for multinational companies. I have worked in the Finance, Automotive, and Education industries, applying my expertise in modeling and software development. At heart, I am a math nerd, receiving my master's in Mathematics at the University of Tennessee. My current areas of focus include creating useful embeddings for various applications such as AI Vision for industrial manufacturing as well as NLP for purchasing similarity recommendations.
+
 

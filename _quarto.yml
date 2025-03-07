@@ -1,15 +1,19 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - assets/Joshua-Hyatt-Resume.pdf
 
 website:
-  title: "personal"
+  title: "Joshua Hyatt"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - projects.qmd
-      - qualifications.qmd
+      - href: projects.qmd
+        text: Projects
+      - href: qualifications.qmd
+        text: Qualifications
   open-graph:
     locale: es_ES
     site-name: "Joshua Hyatt"
@@ -21,7 +25,7 @@ format:
       light: flatly
       dark: darkly
     css: styles.css
-    toc: true
+    toc: false
 
 
 

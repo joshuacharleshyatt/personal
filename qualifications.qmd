@@ -1,4 +1,129 @@
 ---
-title: Qualifications
+title: Joshua Hyatt
+about:
+  template: solana
+  image-shape: round
+  image-width: 0em
+  links:
+    - text: LinkedIn
+      icon: linkedin
+      url: "https://www.linkedin.com/in/joshuachyatt/"
+    - text: GitHub
+      icon: github
+      url: "https://github.com/joshuacharleshyatt"
+    - text: Email
+      icon: envelope
+      url: "mailto:joshuacharleshyatt@gmail.com"
+    - text: PDF
+      icon: file-earmark-pdf
+      url: "assets/Joshua-Hyatt-Resume.pdf"
+format:
+  html:
+    toc: true
 ---
 
+I have over five years of experience working as a Data Scientist and many more years developing technical solutions for multinational companies. I have worked in the finance, automotive, and education industries applying my expertise in modeling and software development. My current areas of focus include creating useful embeddings for various applications such as AI Vision for industrial manufacturing as well as NLP for purchasing similarity recommendations.
+
+
+## Professional Experience
+```{mermaid}
+%%{init: {'theme':'neutral'}}%%
+gantt
+  dateFormat YYYY-MM
+  axisformat %Y
+  section Education
+    Bachelor          :done, e1, 2007-08, 4y
+    Masters           :done, e2, after e1, 2y
+  section Work Experience
+    Pellissippi State :done, w1, after e2, 2y
+    Elavon            :done, w2, after w1, 5y
+    DENSO             :active, w3, after w2, 6y
+```
+
+### Data Scientist III
+::: {.callout-note icon=false}
+#### Denso International America, INC. Maryville, TN	July 2018 – Present
+
+Leverage analytical and programming skills to extract insights from complex datasets to inform strategic decision-making.  Utilize statistical techniques, machine learning algorithms, and data visualization tools to interpret data and solve business problems.Responsibilities include: data cleaning, modeling, deployment, and presenting findings to executive stakeholders. 
+
+- Collaborated with MIT to map and analyze a significant portion of our supply chain network including conducting simulations (using Gurobi) and risk assessments based on GIS data to mitigate potential disruptions from events like earthquakes and floods.
+- Spearheaded development of segmentation-based neural network defect detection algorithms and web UI integration using Flask for multiple inspection robots, increasing quality through improved detection and reducing the number of inspectors.
+- Implemented asset monitoring system to leverage anomaly detection (auto-encoders) and forecasting techniques resulting in early detection of potential breakdowns that contribute to hundreds of thousands of dollars in savings.
+- Oversaw and guided Data Science Internships focused on Natural Language Processing (sentence embedding, UMAP, and NER), enhancing maintenance reporting, and integrating corporate purchases analysis to optimize procurement processes.
+- Proactively forecasted the peak of COVID cases (SEIR) 16 months in advance with a margin of error of only 8 days, which enabled management to anticipate labor shortages and plan accordingly for the height of the pandemic.
+- Established a robust Dev/Sec/Ops pipeline in GitLab, which automated testing and deployment of containerized machine learning applications with web APIs for improved efficiency and reliability.
+-	Devised data collection strategies and developed solution roadmaps for 2 out of 3 key pillars for manufacturing: Predictive Maintenance and AI Vision-based inspection to meet the goals of operational excellence and quality assurance initiatives.
+:::
+
+### Business Analyst II ← DBA ← Fraud Analyst
+::: {.callout-note icon=false}
+#### Elavon Knoxville, TN Nov 2015 – July 2018
+
+Appropriately assigned high-risk fraud accounts to work queues, managed backend relational databases, and provided analytical reporting needs to management.
+
+- Increased the efficiency of managing work queues by accurately identifying fraud, resulting in $200,000+ additional dollars saved compared to the prior 2-year average.
+- Developed an application utilizing web scraping that improved the efficiency of identifying and notating potentially risky accounts by 50%. Estimated savings of $25,000-$50,000 annually.
+- Directed the Dedicated Solutions Team, an initiative to redesign and simplify technological use within the business through automation and analytics. 
+- Awarded the Pinnacle Award for excellence in performance company wide (top 10% of employee performance), April 2016.
+:::
+
+### Adjunct Mathematics Professor 
+::: {.callout-note icon=false}
+#### Pellissippi State Community College Knoxville, TN Aug 2013 – Nov 2015
+
+Planned and held lectures, led in-class discussions, and graded assignments for Statistics, Algebra, and Business Calculus courses.
+:::
+
+## Education
+:::{layout-ncol=2}
+> ### Masters of Science in Mathematics  
+> University of Tennessee - Knoxville, TN  
+> GPA: 3.97/4.0  
+
+> ### Bachelor of Science in Mathematics  
+> Murray State University - Murray, KY  
+> GPA: 3.81/4.0  
+:::
+
+## Expertise
+```{mermaid}
+%%{init: {'theme':'neutral'}}%%
+mindmap
+  root((Skills))
+    Analytics
+      Natural Language Processing
+      Anomaly Detection
+      Convolutional Neural Networks
+      Business Intelligence
+      Literate Progamming
+    Programming
+      Python
+      GIT
+      SQL
+      Linux
+    Deployment
+      Docker
+      CI/CD
+      Automated Testing
+```
+
+::: {.callout-note appearance="simple" collapse=true}
+## Detailed Descriptions
+### Analytics
+-	[X] Natural Language Processing (Word and Sentence embedding, Sentiment Analysis)
+-	[X] Anomaly Detection (Auto-Encoders, One Class SVM, Local Outlier Factor, PCA)
+-	[X] Convolutional Neural Networks (Auto-Encoders, U-net, Image Imbedding)
+-	[X] BI (Tableau, DOMO)
+-	[X] Literate Programming (Jupyter Notebooks, Quarto, Codebraid)
+
+### Programming
+-	[X] Python (NumPy, Pandas, gurobipy, GeoPandas, Scikit-learn, Tensorflow, SciPy, Flask, NLTK, SQLAlchemy, NetworkX, matplotlib, BaseMap, shapely, Beautiful Soup)
+-	[X] GIT
+- [X]	SQL (Postgres, MSSQL, Cassandra, etc)
+- [X] Linux (including terminal)
+
+### Deployment
+- [X] Docker Containerization
+- [X]	CI/CD Pipeline (Gitlab Runner)
+- [X] Automated Testing (Pytest, Selenium Web Testing)
+:::

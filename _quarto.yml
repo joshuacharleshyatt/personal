@@ -3,9 +3,9 @@ project:
   output-dir: docs
   resources:
     - assets/Joshua-Hyatt-Resume.pdf
-  site-url: "https://joshuacharleshyatt.github.io/personal"
-
+  
 website:
+  site-url: https://joshuacharleshyatt.github.io/personal
   title: "Joshua Hyatt"
   navbar:
     left:
@@ -27,6 +27,4 @@ format:
       dark: darkly
     css: styles.css
     toc: false
-
-
 

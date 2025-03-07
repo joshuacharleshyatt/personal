@@ -15,7 +15,7 @@ about:
       url: "mailto:joshuacharleshyatt@gmail.com" 
     - text: Resume
       icon: file-earmark-pdf
-      url: "Joshua-Hyatt-Resume.pdf"
+      href: "assets/Joshua-Hyatt-Resume.pdf"
 comments: false
 ---
 

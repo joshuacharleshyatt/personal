@@ -3,6 +3,7 @@ project:
   output-dir: docs
   resources:
     - assets/Joshua-Hyatt-Resume.pdf
+  site-url: "https://joshuacharleshyatt.github.io/personal"
 
 website:
   title: "Joshua Hyatt"

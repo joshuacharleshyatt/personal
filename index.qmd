@@ -1,7 +1,20 @@
 ---
 title: Joshua Hyatt
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - text: LinkedIn
+      url: "https://www.linkedin.com/in/joshuachyatt/"
+    - text: GitHub
+      icon: github
+      url: "https://github.com/joshuacharleshyatt"
+    - text: Email
+      url: "mailto:joshuacharleshyatt@gmail.com"
+comments: false
 ---
 
-This is a Quarto website.
+## About Me
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I have more than 5 years of experience working as a Data Scientist and many more years developing technical solutions for multinational companies. I have worked in the Finance, Automotive, and Education industries, applying my expertise in modeling and software development. At heart, I am a math nerd, receiving my master's in Mathematics at the University of Tennessee. My current areas of focus include creating useful embeddings for various applications such as AI Vision for industrial manufacturing as well as NLP for purchasing similarity recommendations.
+

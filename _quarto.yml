@@ -8,13 +8,18 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - projects.qmd
+      - qualifications.qmd
+  open-graph:
+    locale: es_ES
+    site-name: "Joshua Hyatt"
+
 
 format:
   html:
     theme:
-      - flatly
-      - brand
+      light: flatly
+      dark: darkly
     css: styles.css
     toc: true
 

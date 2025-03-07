@@ -5,7 +5,7 @@ project:
     - assets/Joshua-Hyatt-Resume.pdf
   
 website:
-  site-url: https://joshuacharleshyatt.github.io/personal
+  site-url: "https://joshuacharleshyatt.github.io/personal/"
   title: "Joshua Hyatt"
   navbar:
     left:

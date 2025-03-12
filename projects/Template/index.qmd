@@ -1,0 +1,126 @@
+---
+date: '2024-03-08'
+title: "Example Paper"
+categories: [Paper, Python, Dataviz]
+image: /assets/profile.jpg
+title-block-banner: false
+jupyter: personal
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-tools: true
+---
+
+```{python}
+from sklearn import get_config
+from config import save_system
+from encryption import RandomState
+import tomli
+import ydata_profiling
+from pycaret.datasets import get_data
+from pycaret.classification.functional import setup, get_config, compare_models
+import seaborn as sns
+import matplotlib.pyplot as plt
+```
+
+```{python}
+save_system()
+
+with open("pyproject.toml", mode="rb") as fp:
+  config = tomli.load(fp)
+
+PROJECT_NAME = config["tool"]["poetry"]["name"]
+RANDOM_STATE = RandomState(PROJECT_NAME).state
+```
+
+# Classifying Irises by Field Measurements
+
+*Classification is a machine learning technique used to predict group membership for data instances.
+The problem concerns the identification of IRIS plant species on the
+basis of plant attribute measurements. Classification of IRIS data set would be discovering patterns
+from examining petal and sepal size of the IRIS plant and how the prediction was made from analyzing the
+pattern to form the class of IRIS plant. By using this pattern and classification, it is possible to
+accurately predict the IRIS Species. Support Vector Machines (SVM) have been
+deployed to perform classification of datasets efficiently. In this work, dimensionality
+reduction techniques such as PCA will be used in conjunction with SVM to classify.*
+
+## Introduction
+
+Bio-informatics is a promising and novel research area in the 21st century. This field is data
+driven and aims at understanding of relationships and gaining knowledge in biology. In order to
+extract this knowledge encoded in biological data, advanced computational technologies,
+algorithms and tools need to be used. Basic problems in bio-informatics like protein structure
+prediction, multiple alignments of sequences, phylogenic inferences, etc are inherently nondeterministic polynomial-time hard in nature. To solve these kinds of problems artificial
+intelligence (AI) methods offer a powerful and efficient approach. Researchers have used AI
+techniques like Artificial Neural Networks (ANN), Fuzzy Logic, Genetic Algorithms, and
+Support Vector Machines to solve problems in bio-informatics.
+
+The concern of this study is towards the identification of IRIS plants on the basis of the
+following measurements: sepal length, sepal width, petal length, and petal width.
+This paper is mainly concerned with an analysis of the performance results of classification techniques
+such as Decision Tree, Support Vector Machine (SVM) in determining the species of the Iris plants.
+
+## Data
+
+One of the most popular and best known databases of the neural network application is the IRIS
+plant data set which is obtained from UCI Machine Learning Repository and created by R.A.
+Fisher while donated by Michael Marshall (MARSHALL%PLU@io.arc.nasa.gov) on July, 1988
+
+The IRIS dataset classifies three different classes of IRIS plant by performing pattern
+classification. The IRIS data set includes three classes of 50 objects each, where each class
+refers to a type of IRIS plant. The attributed that already been predicted belongs to the class of
+IRIS plant. The list of attributes present in the IRIS can be described as categorical, nominal and
+continuous. The experts have mentioned that there isn’t any missing value found in any attribute
+of this data set. The data set is complete.
+
+This project makes use of the well known IRIS dataset, which refers to three classes of 50
+instances each, where each class refers to a type of IRIS plant. The first of the classes is linearly
+distinguishable from the remaining two, with the second two not being linearly separable from
+each other. The 150 instances, which are equally separated between the three classes, contain the
+following four numeric attributes:
+
+
+```{python}
+#| tbl-cap: Iris Measures
+data = get_data("iris")
+decoder = ['setosa', 'versicolor', 'virginica']
+```
+
+The fifth attribute is the predictive attributes which is the class attribute that means each instance
+also includes an identifying class name, each of which is one of the following: IRIS Setosa, IRIS
+Versicolour, or IRIS Virginica.
+
+
+```{python}
+report = data.profile_report(progress_bar=False, title="Iris EDA Report")
+report.to_file("assets/Iris_EDA.html", silent = True)
+```
+
+## Methods
+
+Dimensionality reduction is a really important concept in Machine Learning since
+it reduces the number of features in a dataset and hence reduces the
+computations needed to fit the model. **PCA** is one of the well known efficient
+dimensionality reduction techniques. in this tutorial we will use PCA which
+compresses the data by projecting it to a new subspace that can help in reducing
+the effect of the **curse of dimensionality**. Our dataset consists of
+4 dimensions(4 features) so we will project it to a 2 dimensions space and
+plot it for visualization.
+
+```{python}
+env = setup(data, target="species", train_size = .8, session_id = RANDOM_STATE, pca=True, pca_components = 2, verbose = False, normalize = True)
+```
+
+```{python}
+#| tbl-cap: Reduced Dimension Measurements
+env.X_transformed.head()
+```
+
+The first principle component has the highest explained variance, followed by the 2nd component. By plotting these 2 components, we get a view of the 4 dimensions with as much explained variance as possible for a linear transformation. Although not a guarantee to be beneficial, often as in this case, clear separation of the target class can be observed in the transformed subspace.
+
+```{python}
+pca = env.pipeline[-1].transformer 
+plt.figure()
+sns.scatterplot(env.X_transformed, x="pca0", y="pca1", hue=data["species"]).set(title="IRIS Species Scatter Plot \n Explained Variance: %.3f" % pca.explained_variance_ratio_.sum())
+```

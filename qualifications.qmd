@@ -30,7 +30,7 @@ I have over five years of experience working as a Data Scientist and many more y
 %%{init: {'theme':'neutral'}}%%
 gantt
   dateFormat YYYY-MM
-  axisformat %Y
+  axisformat %y
   section Education
     Bachelor          :done, e1, 2007-08, 4y
     Masters           :done, e2, after e1, 2y

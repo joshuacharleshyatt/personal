@@ -1,0 +1,12 @@
+{
+  "hash": "69e39b58981c674c12e53e631d3e9396",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ndate: '2023-10-08'\ntitle: \"Example Paper\"\ncategories: [Paper, Python, Dataviz]\nimage: /assets/profile.jpg\ntitle-block-banner: false\njupyter: personal\nformat:\n  html:\n    toc: true\n    code-fold: true\n    code-tools: true\n---\n\n\nThis is some python code \n\n::: {#75a314e3 .cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nx = np.array([1,2,3,4,5])\ny = x*2\n```\n:::\n\n\n## Plotting\n\n::: {#d01bfeb7 .cell execution_count=2}\n``` {.python .cell-code}\nimport matplotlib.pyplot as plt\n\nplt.plot(x,y)\nplt.show()\n```\n\n::: {.cell-output .cell-output-display}\n![](index_files/figure-html/cell-3-output-1.png){}\n:::\n:::\n\n\n::: {#0cb969cf .cell execution_count=3}\n``` {.python .cell-code}\nimport seaborn as sns\n```\n:::\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

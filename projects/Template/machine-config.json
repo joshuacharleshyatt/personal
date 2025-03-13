@@ -1,0 +1,24 @@
+{
+    "architecture": [
+        "64bit",
+        "ELF"
+    ],
+    "machine type": "x86_64",
+    "machine name": "TNPW0G4RLQ",
+    "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "cpu count": 14,
+    "cpu frequency": "0.00Mhz",
+    "memory": "7.49GB",
+    "swap": "2.00GB",
+    "system": "Linux",
+    "release": "5.15.167.4-microsoft-standard-WSL2",
+    "release version": "#1 SMP Tue Nov 5 00:21:55 UTC 2024",
+    "python build": [
+        "main",
+        "Dec  4 2024 08:55:08"
+    ],
+    "compiler": "GCC 13.2.0",
+    "python version": "3.11.11",
+    "python implement": "CPython"
+}

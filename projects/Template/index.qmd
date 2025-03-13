@@ -2,32 +2,46 @@
 date: '2024-03-08'
 title: "Example Paper"
 categories: [Paper, Python, Dataviz]
-image: /assets/profile.jpg
+image: /assets/Iris_pca.png
 title-block-banner: false
-jupyter: personal
 format:
   html:
     toc: true
     code-fold: true
     code-tools: true
+    link-external-icon: true
+    link-external-newwindow: true
 ---
 
 ```{python}
+#| output: false
+import io
 from sklearn import get_config
 from config import save_system
 from encryption import RandomState
 import tomli
-import ydata_profiling
+from contextlib import redirect_stdout
+
+# remove stupid advert
+f = io.StringIO()
+with redirect_stdout(f):
+  import ydata_profiling as yd
+
 from pycaret.datasets import get_data
-from pycaret.classification.functional import setup, get_config, compare_models
+from pycaret.classification.functional import setup, get_config, compare_models, create_model, pull, finalize_model, save_model, plot_model, evaluate_model
 import seaborn as sns
 import matplotlib.pyplot as plt
+plt.rcParams['font.family'] = 'DeJavu Serif'
+plt.rcParams['font.serif'] = ['Times New Roman']
+from yellowbrick.features import rank2d
+import yellowbrick as yb
+import dtreeviz
 ```
 
 ```{python}
 save_system()
 
-with open("pyproject.toml", mode="rb") as fp:
+with open("../../pyproject.toml", mode="rb") as fp:
   config = tomli.load(fp)
 
 PROJECT_NAME = config["tool"]["poetry"]["name"]
@@ -89,12 +103,12 @@ decoder = ['setosa', 'versicolor', 'virginica']
 
 The fifth attribute is the predictive attributes which is the class attribute that means each instance
 also includes an identifying class name, each of which is one of the following: IRIS Setosa, IRIS
-Versicolour, or IRIS Virginica.
+Versicolour, or IRIS Virginica. A copy of the report can be found here [EDA Report](../../assets/Iris_EDA.html)
 
 
 ```{python}
 report = data.profile_report(progress_bar=False, title="Iris EDA Report")
-report.to_file("assets/Iris_EDA.html", silent = True)
+report.to_file("../../assets/Iris_EDA.html", silent = True)
 ```
 
 ## Methods
@@ -109,18 +123,151 @@ the effect of the **curse of dimensionality**. Our dataset consists of
 plot it for visualization.
 
 ```{python}
-env = setup(data, target="species", train_size = .8, session_id = RANDOM_STATE, pca=True, pca_components = 2, verbose = False, normalize = True)
+env_pca = setup(data, target="species", train_size = .8, session_id = RANDOM_STATE, pca=True, pca_components = 2, verbose = False, normalize = True)
 ```
 
 ```{python}
 #| tbl-cap: Reduced Dimension Measurements
-env.X_transformed.head()
+env_pca.X_transformed.head()
 ```
 
 The first principle component has the highest explained variance, followed by the 2nd component. By plotting these 2 components, we get a view of the 4 dimensions with as much explained variance as possible for a linear transformation. Although not a guarantee to be beneficial, often as in this case, clear separation of the target class can be observed in the transformed subspace.
 
 ```{python}
-pca = env.pipeline[-1].transformer 
+pca = env_pca.pipeline.named_steps["pca"].transformer
 plt.figure()
-sns.scatterplot(env.X_transformed, x="pca0", y="pca1", hue=data["species"]).set(title="IRIS Species Scatter Plot \n Explained Variance: %.3f" % pca.explained_variance_ratio_.sum())
+sns.scatterplot(env_pca.X_transformed, x="pca0", y="pca1", hue=data["species"]).set(title="IRIS Species Scatter Plot \n Explained Variance: %.3f" % pca.explained_variance_ratio_.sum())
 ```
+
+### Feature Importance
+While PCA is great for dimensionality reduction and visualization, we do lose some interpretability in how the scientific measurements are correlated to the target species. For this, we look at feature rank and feature importance charts to determine the measurements most affecting the separation between classes.
+
+```{python}
+env_norm = setup(data, target="species", train_size = .8, session_id = RANDOM_STATE, verbose = False, normalize=True)
+```
+
+```{python}
+#| layout-ncol: 2
+#| fig-cap: 
+#|   - "Pairwise Feature Correlation"
+#|   - "Target Correlation"
+fig = rank2d(get_config("X_train"), get_config("y_train"))
+fig = yb.target.feature_correlation.feature_correlation(env_norm.X_train, env_norm.y_train, method='mutual_info-classification')
+```
+
+<br>
+Standard practice is to perform train test split on the transformed data to evaluate the model performance.
+We will use the convention that splits the data in 80% training/validation and 20% test set.
+Because the sample size is relatively small, we will use cross validation to prevent overfitting.
+We set the random state to a constant value in order to get consistent results when we rerun the code.
+The advantages of this technique are the ability to limit overfitting on a relatively small dataset.
+
+```{python}
+fig = yb.target.class_balance(env_norm.y_train, env_norm.y_test, labels = decoder)
+```
+
+## Analysis
+
+In this section, we analyze how our primary models performed,
+and discuss reasons why they did not perform even
+better. Specifically, we will analyze why certain species were
+commonly confused with others. Confusing **versicolor** and **virginica**
+is understandable based on the boundary overlap in the PCA analysis.
+
+The results of the SVM model on unseen data are measured on the f1 score, a
+geometric mean of the precision and recall scores. This measure is considered
+a more realistic measure of the overall accuracy of the classification model. Of interest is the variation in performance on each cross validation run. A standard deviation in the range of 5%-10% may see performance results on test or production data far inferior than what is reported in validation. 
+
+```{python}
+#| tbl-cap: Cross Validation Results
+
+# Modeling
+svm_model = create_model("svm", tol=1e-3, alpha=.0012, verbose=False) # parameters can be found with tune_model
+pull()
+```
+
+For comparison, a simple decision tree was trained as well. The following metrics demonstrate the varying performance on each class of the models. Standard metrics for classification are precision, recall and f1 score for each class as well as a confusion matrix. A ROC curve would also be included to demonstrate how the model performance can very even within a confusion matrix if you take into account a rank function. Such a rank function is generally only available for models as using probability based classification such as logistic regression.
+
+
+```{python}
+tree_model = create_model("dt", max_depth=3, verbose = False)
+winning_model = compare_models(include=[svm_model, tree_model], verbose = False)
+pull()
+```
+
+Most sources would indicate at this point to choose the best performing model and then run a test on the holdout dataset. It is important to make a model selection before running a holdout test as the performance results of each model may vary on the holdout set and the winning model may change. Because the purpose of the holdout set is to evaluate a model on unseen data, we cannot retroactively choose the best model for said test. 
+
+For demonstration purposes, the performance results for both SVM and Decision Tree on the test set are shown. In the next section, we explain why we may choose a certain model even if inferior in performance.
+
+
+::: {#fig-metrics layout-ncol=2}
+```{python}
+fig = plot_model(svm_model, plot = "confusion_matrix", plot_kwargs = {"classes": decoder})
+```
+```{python}
+fig = plot_model(tree_model, plot = "confusion_matrix", plot_kwargs = {"classes": decoder})
+```
+```{python}
+fig = plot_model(svm_model, plot = "class_report", plot_kwargs = {"classes": decoder})
+```
+```{python}
+fig = plot_model(tree_model, plot = "class_report", plot_kwargs = {"classes": decoder})
+```
+:::
+
+
+```{python}
+message = save_model(svm_model, "models/svm-model", verbose = False)
+message = save_model(tree_model, "models/tree-model", verbose = False)
+```
+
+### Model Interpretability
+
+Unfortunately SVM uses a higher dimensional space to linearly slice the sample space into class specific hyperplanes. Visualizing how this is down is difficult, but understood well geometrically. However, the decision tree can easily be visualized and explain the predictive power of the model on the test set. This example shows a mislabeled iris, but more importantly demonstrates how that incorrect result was obtained. 
+
+```{python}
+# Build a model on the final data for deployment.
+env_prod = setup(data, target="species", train_size = .8, session_id = RANDOM_STATE, verbose = False) # trees don't need normalization
+final_tree = finalize_model(tree_model)
+message = save_model(final_tree, "models/production-model", verbose = False)
+```
+
+```{python}
+# Visualize predictions
+sample = env_prod.X_transformed.iloc[120] 
+final_tree_model = final_tree.named_steps['actual_estimator']
+viz_model =  dtreeviz.model(final_tree_model, X_train=env_prod.X_transformed, y_train = env_prod.y_transformed, feature_names = list(env_prod.X_transformed), target_name = "species name", class_names = decoder)
+viz_model.view(x = sample, fontname="DejaVu Sans")
+```
+
+In-case displaying the entire tree is not desirable especially in regulatory environemts, we can instead display the list of features and their importance related to the decision. 
+
+```{python}
+viz_model.instance_feature_importance(sample, fontname="DejaVu Sans")
+#explanation = eli5.explain_prediction(final_tree, env_prod.X.iloc[106], target_names = decoder)
+#print(eli5.format_as_text(explanation), f"True Class: {decoder[env_prod.y[106]]}")
+```
+
+## Conclusion
+We have constructed a relatively accurate classifier for species of
+Iris flowers based on the field measurements. Using PCA analysis to visualize the data
+there were clear segments that could be made to classify the various species.
+Feeding this data into a Support Vector Machine (SVM), we were able to achieve
+a relatively high F1 score with cross validation as well as the test set, thus confirming validation results.
+Similarly great results were shown for the Decision Tree model as well.
+
+Because SVM is difficult to perform in the fields, and PCA transforms the data
+into features that represent eigenvectors, this method will prove difficult to
+interpret as simple rules of known biological dimensions. For field use, it
+will be of interest to use other
+classification methods such as decision tree that is
+both as accurate if not more soe than SVM and easier to use and understand in the field for biological classification.
+
+Of further interest is the closeness of the **versicolor** and **virginica**
+species with regard to the field measurements. Future studies may explore finding another measure to help differentiate them more as we see there is some similarities in their measurements. This would greatly increase the performance of any model for the purpose of classification. 
+
+
+## Appendix
+
+The entire website, including this example project is located at [https://github.com/joshuacharleshyatt/personal](https://github.com/joshuacharleshyatt/personal)
+

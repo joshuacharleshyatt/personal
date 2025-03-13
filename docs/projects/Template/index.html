@@ -174,9 +174,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
   <ul class="collapse">
+  <li><a href="#classification-by-support-vector-machine" id="toc-classification-by-support-vector-machine" class="nav-link" data-scroll-target="#classification-by-support-vector-machine">Classification by Support Vector Machine</a></li>
+  <li><a href="#comparison-to-decision-tree" id="toc-comparison-to-decision-tree" class="nav-link" data-scroll-target="#comparison-to-decision-tree">Comparison to Decision Tree</a></li>
   <li><a href="#model-interpretability" id="toc-model-interpretability" class="nav-link" data-scroll-target="#model-interpretability">Model Interpretability</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
+  <li><a href="#conclusion-1" id="toc-conclusion-1" class="nav-link" data-scroll-target="#conclusion-1">Conclusion</a></li>
+  <li><a href="#future-work" id="toc-future-work" class="nav-link" data-scroll-target="#future-work">Future Work</a></li>
+  </ul></li>
   <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
   </ul></li>
   </ul>
@@ -215,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="f9463d5f" class="cell" data-execution_count="1">
+<div id="685f9ed5" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
@@ -231,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> ydata_profiling <span class="im">as</span> yd</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pycaret.datasets <span class="im">import</span> get_data</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pycaret.classification.functional <span class="im">import</span> setup, get_config, compare_models, create_model, pull, finalize_model, save_model, plot_model, evaluate_model</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pycaret.classification.functional <span class="im">import</span> setup, get_config, compare_models, create_model, pull, finalize_model, save_model, plot_model</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'font.family'</span>] <span class="op">=</span> <span class="st">'DeJavu Serif'</span></span>
@@ -241,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dtreeviz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="f74d98a5" class="cell" data-execution_count="2">
+<div id="bb3d3863" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>save_system()</span>
@@ -255,17 +262,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="classifying-irises-by-field-measurements" class="level1">
 <h1>Classifying Irises by Field Measurements</h1>
-<p><em>Classification is a machine learning technique used to predict group membership for data instances. The problem concerns the identification of IRIS plant species on the basis of plant attribute measurements. Classification of IRIS data set would be discovering patterns from examining petal and sepal size of the IRIS plant and how the prediction was made from analyzing the pattern to form the class of IRIS plant. By using this pattern and classification, it is possible to accurately predict the IRIS Species. Support Vector Machines (SVM) have been deployed to perform classification of datasets efficiently. In this work, dimensionality reduction techniques such as PCA will be used in conjunction with SVM to classify.</em></p>
+<p><em>Classification is a fundamental machine learning technique used to predict the group membership of data instances based on input features. The Iris dataset, a well-known benchmark in machine learning, presents a classification challenge involving three species of the Iris plant based on sepal and petal measurements. This paper explores the application of Support Vector Machines (SVM) combined with Principal Component Analysis (PCA) for dimensionality reduction to enhance classification accuracy and interpretability. Performance metrics, including precision, recall, F1 score, and confusion matrices, are analyzed to evaluate model effectiveness. The study demonstrates that while SVM achieves high classification accuracy, Decision Trees provide greater interpretability, which is valuable for practical applications in biological classification.</em></p>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Bio-informatics is a promising and novel research area in the 21st century. This field is data driven and aims at understanding of relationships and gaining knowledge in biology. In order to extract this knowledge encoded in biological data, advanced computational technologies, algorithms and tools need to be used. Basic problems in bio-informatics like protein structure prediction, multiple alignments of sequences, phylogenic inferences, etc are inherently nondeterministic polynomial-time hard in nature. To solve these kinds of problems artificial intelligence (AI) methods offer a powerful and efficient approach. Researchers have used AI techniques like Artificial Neural Networks (ANN), Fuzzy Logic, Genetic Algorithms, and Support Vector Machines to solve problems in bio-informatics.</p>
-<p>The concern of this study is towards the identification of IRIS plants on the basis of the following measurements: sepal length, sepal width, petal length, and petal width. This paper is mainly concerned with an analysis of the performance results of classification techniques such as Decision Tree, Support Vector Machine (SVM) in determining the species of the Iris plants.</p>
+<p>Bioinformatics is an emerging and rapidly evolving field focused on extracting meaningful insights from biological data using computational techniques. Fundamental challenges in bioinformatics, such as protein structure prediction, sequence alignment, and phylogenetic inference, are often computationally complex and classified as NP-hard problems. Machine learning (ML) methods, including Artificial Neural Networks (ANN), Fuzzy Logic, Genetic Algorithms, and Support Vector Machines (SVM), have shown promise in addressing these challenges.</p>
+<p>This study focuses on classifying Iris species using measurements of sepal length, sepal width, petal length, and petal width. The Iris dataset, introduced by R.A. Fisher in 1936, has become a standard benchmark for classification models. The goal is to evaluate the effectiveness of SVM for classification and explore the impact of dimensionality reduction using PCA on model performance. Decision Tree models are also assessed for comparison, balancing accuracy with interpretability.</p>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>One of the most popular and best known databases of the neural network application is the IRIS plant data set which is obtained from UCI Machine Learning Repository and created by R.A. Fisher while donated by Michael Marshall (MARSHALL%PLU@io.arc.nasa.gov) on July, 1988</p>
-<p>The IRIS dataset classifies three different classes of IRIS plant by performing pattern classification. The IRIS data set includes three classes of 50 objects each, where each class refers to a type of IRIS plant. The attributed that already been predicted belongs to the class of IRIS plant. The list of attributes present in the IRIS can be described as categorical, nominal and continuous. The experts have mentioned that there isn’t any missing value found in any attribute of this data set. The data set is complete.</p>
-<p>This project makes use of the well known IRIS dataset, which refers to three classes of 50 instances each, where each class refers to a type of IRIS plant. The first of the classes is linearly distinguishable from the remaining two, with the second two not being linearly separable from each other. The 150 instances, which are equally separated between the three classes, contain the following four numeric attributes:</p>
+<p>The Iris dataset, obtained from the UCI Machine Learning Repository, consists of 150 instances representing three species of Iris plants:</p>
+<ul>
+<li>Iris Setosa</li>
+<li>Iris Versicolor</li>
+<li>Iris Virginica</li>
+</ul>
+<p>Each species is represented by 50 samples. The dataset includes four numeric attributes:</p>
+<ul>
+<li>Sepal length (cm)</li>
+<li>Sepal width (cm)</li>
+<li>Petal length (cm)</li>
+<li>Petal width (cm)</li>
+</ul>
 <div class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
@@ -335,8 +352,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The fifth attribute is the predictive attributes which is the class attribute that means each instance also includes an identifying class name, each of which is one of the following: IRIS Setosa, IRIS Versicolour, or IRIS Virginica. A copy of the report can be found here <a href="../../assets/Iris_EDA.html">EDA Report</a></p>
-<div id="63a1e9e7" class="cell" data-execution_count="4">
+<p>The fifth attribute is the class label indicating the species. The dataset is complete, with no missing values or inconsistencies reported. While the Setosa species is separable from the other two species, Versicolor and Virginica exhibit significant overlap, making classification the challenge of the study. A copy of the exploratory data report can be found here <a href="../../assets/Iris_EDA.html">EDA Report</a></p>
+<div id="9f23a5da" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> data.profile_report(progress_bar<span class="op">=</span><span class="va">False</span>, title<span class="op">=</span><span class="st">"Iris EDA Report"</span>)</span>
@@ -346,8 +363,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<p>Dimensionality reduction is a really important concept in Machine Learning since it reduces the number of features in a dataset and hence reduces the computations needed to fit the model. <strong>PCA</strong> is one of the well known efficient dimensionality reduction techniques. in this tutorial we will use PCA which compresses the data by projecting it to a new subspace that can help in reducing the effect of the <strong>curse of dimensionality</strong>. Our dataset consists of 4 dimensions(4 features) so we will project it to a 2 dimensions space and plot it for visualization.</p>
-<div id="e9ae3d63" class="cell" data-execution_count="5">
+<p>Principal Component Analysis (PCA) is a widely used dimensionality reduction technique that can project data onto a lower-dimensional subspace while retaining the maximum variance. PCA helps reduce the computational complexity of the classification task, but more importantly in this instance, improves visualization.</p>
+<p>In this study, PCA reduces the four-dimensional Iris data into two principal components:</p>
+<ul>
+<li>First Principal Component: Accounts for the highest variance in the data.</li>
+<li>Second Principal Component: Captures the next highest variance.</li>
+</ul>
+<div id="a8403354" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>env_pca <span class="op">=</span> setup(data, target<span class="op">=</span><span class="st">"species"</span>, train_size <span class="op">=</span> <span class="fl">.8</span>, session_id <span class="op">=</span> RANDOM_STATE, pca<span class="op">=</span><span class="va">True</span>, pca_components <span class="op">=</span> <span class="dv">2</span>, verbose <span class="op">=</span> <span class="va">False</span>, normalize <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -358,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>env_pca.X_transformed.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="66">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
@@ -403,8 +425,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The first principle component has the highest explained variance, followed by the 2nd component. By plotting these 2 components, we get a view of the 4 dimensions with as much explained variance as possible for a linear transformation. Although not a guarantee to be beneficial, often as in this case, clear separation of the target class can be observed in the transformed subspace.</p>
-<div id="995d98d1" class="cell" data-execution_count="7">
+<p>By plotting the data along these two principal components, a clear separation between the Setosa species and the other two species becomes visible. However, Versicolor and Virginica still exhibit considerable overlap.</p>
+<div id="bb6faf68" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> env_pca.pipeline.named_steps[<span class="st">"pca"</span>].transformer</span>
@@ -422,7 +444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="feature-importance" class="level3">
 <h3 class="anchored" data-anchor-id="feature-importance">Feature Importance</h3>
 <p>While PCA is great for dimensionality reduction and visualization, we do lose some interpretability in how the scientific measurements are correlated to the target species. For this, we look at feature rank and feature importance charts to determine the measurements most affecting the separation between classes.</p>
-<div id="acc73886" class="cell" data-execution_count="8">
+<div id="5f714505" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>env_norm <span class="op">=</span> setup(data, target<span class="op">=</span><span class="st">"species"</span>, train_size <span class="op">=</span> <span class="fl">.8</span>, session_id <span class="op">=</span> RANDOM_STATE, verbose <span class="op">=</span> <span class="va">False</span>, normalize<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -433,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> rank2d(get_config(<span class="st">"X_train"</span>), get_config(<span class="st">"y_train"</span>))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> yb.target.feature_correlation.feature_correlation(env_norm.X_train, env_norm.y_train, method<span class="op">=</span><span class="st">'mutual_info-classification'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="a585eabd" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="9">
+<div id="1033b0f8" class="cell quarto-layout-panel" data-execution_count="9" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
@@ -453,8 +475,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p><br> Standard practice is to perform train test split on the transformed data to evaluate the model performance. We will use the convention that splits the data in 80% training/validation and 20% test set. Because the sample size is relatively small, we will use cross validation to prevent overfitting. We set the random state to a constant value in order to get consistent results when we rerun the code. The advantages of this technique are the ability to limit overfitting on a relatively small dataset.</p>
-<div id="55ab71b2" class="cell" data-execution_count="10">
+<p><br> Standard practice is to perform train test split on the transformed data to evaluate the model performance. We will use the convention that splits the data in 80% training/validation and 20% test set. Because the sample size is relatively small, we will use cross validation to prevent overfitting. The advantages of this technique are the ability to limit overfitting on a relatively small dataset.</p>
+<div id="45a309fe" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> yb.target.class_balance(env_norm.y_train, env_norm.y_test, labels <span class="op">=</span> decoder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -471,16 +493,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="analysis" class="level2">
 <h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
-<p>In this section, we analyze how our primary models performed, and discuss reasons why they did not perform even better. Specifically, we will analyze why certain species were commonly confused with others. Confusing <strong>versicolor</strong> and <strong>virginica</strong> is understandable based on the boundary overlap in the PCA analysis.</p>
-<p>The results of the SVM model on unseen data are measured on the f1 score, a geometric mean of the precision and recall scores. This measure is considered a more realistic measure of the overall accuracy of the classification model. Of interest is the variation in performance on each cross validation run. A standard deviation in the range of 5%-10% may see performance results on test or production data far inferior than what is reported in validation.</p>
+<p>The models were evaluated using an 80/20 train-test split with five-fold cross-validation to mitigate overfitting. Evaluation metrics included:</p>
+<ul>
+<li>Precision – The proportion of correct positive predictions.</li>
+<li>Recall – The proportion of actual positives correctly identified.</li>
+<li>F1 Score – The harmonic mean of precision and recall, providing a balanced measure of model accuracy.</li>
+<li>Confusion Matrix - Illustrates misclassification patterns across species.</li>
+</ul>
+<section id="classification-by-support-vector-machine" class="level3">
+<h3 class="anchored" data-anchor-id="classification-by-support-vector-machine">Classification by Support Vector Machine</h3>
+<p>Support Vector Machines (SVM) are effective for high-dimensional classification problems. SVM constructs a hyperplane in a multi-dimensional space that maximally separates the classes. In cases where the data is not linearly separable, SVM employs a kernel trick to map the data into a higher-dimensional space where linear separation becomes possible.</p>
 <div class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modeling</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>svm_model <span class="op">=</span> create_model(<span class="st">"svm"</span>, tol<span class="op">=</span><span class="fl">1e-3</span>, alpha<span class="op">=</span><span class="fl">.0012</span>, verbose<span class="op">=</span><span class="va">False</span>) <span class="co"># parameters can be found with tune_model</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>pull()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>svm_model <span class="op">=</span> create_model(<span class="st">"svm"</span>, tol<span class="op">=</span><span class="fl">1e-3</span>, alpha<span class="op">=</span><span class="fl">.0012</span>, verbose<span class="op">=</span><span class="va">False</span>) <span class="co"># parameters can be found with tune_model</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>pull()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="71">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <div>
 
 
@@ -635,15 +664,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>For comparison, a simple decision tree was trained as well. The following metrics demonstrate the varying performance on each class of the models. Standard metrics for classification are precision, recall and f1 score for each class as well as a confusion matrix. A ROC curve would also be included to demonstrate how the model performance can very even within a confusion matrix if you take into account a rank function. Such a rank function is generally only available for models as using probability based classification such as logistic regression.</p>
-<div id="7ce5692f" class="cell" data-execution_count="12">
+</section>
+<section id="comparison-to-decision-tree" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-to-decision-tree">Comparison to Decision Tree</h3>
+<p>A Decision Tree classifier was used as a benchmark to compare with the SVM model. Decision Trees provide an interpretable model by recursively splitting the data based on the most informative features. The tree structure allows for straightforward interpretation of how classifications are made.</p>
+<div id="bfdd195d" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tree_model <span class="op">=</span> create_model(<span class="st">"dt"</span>, max_depth<span class="op">=</span><span class="dv">3</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>winning_model <span class="op">=</span> compare_models(include<span class="op">=</span>[svm_model, tree_model], verbose <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>pull()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="72">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
 
@@ -693,8 +725,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Most sources would indicate at this point to choose the best performing model and then run a test on the holdout dataset. It is important to make a model selection before running a holdout test as the performance results of each model may vary on the holdout set and the winning model may change. Because the purpose of the holdout set is to evaluate a model on unseen data, we cannot retroactively choose the best model for said test.</p>
-<p>For demonstration purposes, the performance results for both SVM and Decision Tree on the test set are shown. In the next section, we explain why we may choose a certain model even if inferior in performance.</p>
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_model(svm_model, plot <span class="op">=</span> <span class="st">"confusion_matrix"</span>, plot_kwargs <span class="op">=</span> {<span class="st">"classes"</span>: decoder})</span>
@@ -706,7 +736,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-metrics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div id="928e3b95" class="cell quarto-layout-cell" data-execution_count="13" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="e0603ac0" class="cell quarto-layout-cell" data-execution_count="13" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output cell-output-display">
 
 </div>
@@ -718,7 +748,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="3763ae0a" class="cell quarto-layout-cell" data-execution_count="14" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="31e56b9d" class="cell quarto-layout-cell" data-execution_count="14" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output cell-output-display">
 
 </div>
@@ -732,7 +762,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="quarto-layout-row">
-<div id="e193446a" class="cell quarto-layout-cell" data-execution_count="15" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="75c49c1f" class="cell quarto-layout-cell" data-execution_count="15" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output cell-output-display">
 
 </div>
@@ -744,7 +774,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="52a3c66c" class="cell quarto-layout-cell" data-execution_count="16" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="aa690cec" class="cell quarto-layout-cell" data-execution_count="16" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output cell-output-display">
 
 </div>
@@ -763,17 +793,19 @@ Figure&nbsp;1
 </figcaption>
 </figure>
 </div>
-<div id="2598fb3e" class="cell" data-execution_count="17">
+<p>The Decision Tree model achieved comparable performance, almost identical to the Support Vector Machine. This is a common phenomenon in machine learning applications and often greatly ignored by auto=ml packages. Decision Trees, provide a more transparent decision-making process, which is valuable for field applications where understanding the classification process is essential.</p>
+<div id="6de377bf" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> save_model(svm_model, <span class="st">"models/svm-model"</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> save_model(tree_model, <span class="st">"models/tree-model"</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section>
 <section id="model-interpretability" class="level3">
 <h3 class="anchored" data-anchor-id="model-interpretability">Model Interpretability</h3>
-<p>Unfortunately SVM uses a higher dimensional space to linearly slice the sample space into class specific hyperplanes. Visualizing how this is down is difficult, but understood well geometrically. However, the decision tree can easily be visualized and explain the predictive power of the model on the test set. This example shows a mislabeled iris, but more importantly demonstrates how that incorrect result was obtained.</p>
-<div id="0b43680b" class="cell" data-execution_count="18">
+<p>A simple decision tree can be printed out as a flowchart or a series of branching yes/no questions, making it easy to use in field work where quick decisions are necessary. Each node in the tree represents a question based on a specific feature, such as “Is petal length greater than 2.5 cm?” The branches lead to subsequent questions or to a classification decision, such as identifying the plant as Setosa or Versicolor. This format allows field researchers to visually trace the decision path step-by-step, even without access to computational tools. The straightforward structure of a decision tree makes it easy to understand and follow, enabling non-experts to accurately classify samples based on observable characteristics. The transparency and simplicity of the printed decision tree make it particularly valuable for practical applications in biological fieldwork.</p>
+<div id="2372366b" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build a model on the final data for deployment.</span></span>
@@ -782,7 +814,7 @@ Figure&nbsp;1
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> save_model(final_tree, <span class="st">"models/production-model"</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cf6689e8" class="cell" data-execution_count="19">
+<div id="4b766fb7" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize predictions</span></span>
@@ -791,7 +823,7 @@ Figure&nbsp;1
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>viz_model <span class="op">=</span>  dtreeviz.model(final_tree_model, X_train<span class="op">=</span>env_prod.X_transformed, y_train <span class="op">=</span> env_prod.y_transformed, feature_names <span class="op">=</span> <span class="bu">list</span>(env_prod.X_transformed), target_name <span class="op">=</span> <span class="st">"species name"</span>, class_names <span class="op">=</span> decoder)</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>viz_model.view(x <span class="op">=</span> sample, fontname<span class="op">=</span><span class="st">"DejaVu Sans"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="79">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <div>
 <figure class="figure">
 <p><img src="index_files/figure-html/cell-20-output-1.svg" class="img-fluid figure-img"></p>
@@ -799,13 +831,11 @@ Figure&nbsp;1
 </div>
 </div>
 </div>
-<p>In-case displaying the entire tree is not desirable especially in regulatory environemts, we can instead display the list of features and their importance related to the decision.</p>
-<div id="b4142ca8" class="cell" data-execution_count="20">
+<p>In-case displaying the entire tree is not desirable especially in regulatory environments, we can instead display the list of features and their importance related to the decision.</p>
+<div id="5255da60" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>viz_model.instance_feature_importance(sample, fontname<span class="op">=</span><span class="st">"DejaVu Sans"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#explanation = eli5.explain_prediction(final_tree, env_prod.X.iloc[106], target_names = decoder)</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#print(eli5.format_as_text(explanation), f"True Class: {decoder[env_prod.y[106]]}")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>viz_model.instance_feature_importance(sample, fontname<span class="op">=</span><span class="st">"DejaVu Sans"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -819,9 +849,23 @@ Figure&nbsp;1
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>We have constructed a relatively accurate classifier for species of Iris flowers based on the field measurements. Using PCA analysis to visualize the data there were clear segments that could be made to classify the various species. Feeding this data into a Support Vector Machine (SVM), we were able to achieve a relatively high F1 score with cross validation as well as the test set, thus confirming validation results. Similarly great results were shown for the Decision Tree model as well.</p>
-<p>Because SVM is difficult to perform in the fields, and PCA transforms the data into features that represent eigenvectors, this method will prove difficult to interpret as simple rules of known biological dimensions. For field use, it will be of interest to use other classification methods such as decision tree that is both as accurate if not more soe than SVM and easier to use and understand in the field for biological classification.</p>
-<p>Of further interest is the closeness of the <strong>versicolor</strong> and <strong>virginica</strong> species with regard to the field measurements. Future studies may explore finding another measure to help differentiate them more as we see there is some similarities in their measurements. This would greatly increase the performance of any model for the purpose of classification.</p>
+<section id="discussion" class="level3">
+<h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
+<p>Misclassification between Versicolor and Virginica reflects the biological similarities in their sepal and petal measurements. Future research could explore additional botanical features or incorporate other ML techniques, such as ensemble methods or deep learning, to improve discrimination between these species.</p>
+<p>SVM remains a powerful classification tool for complex, high-dimensional datasets. However, the increased interpretability of Decision Trees suggests that they may be more suitable for practical, real-world applications in biological research.</p>
+</section>
+<section id="conclusion-1" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-1">Conclusion</h3>
+<p>This study demonstrates the effectiveness of SVM in classifying Iris species based on sepal and petal measurements. PCA successfully reduced the data dimensionality, improving visualization. SVM achieves high accuracy, however, the interpretability of Decision Trees makes them a valuable alternative for practical applications where model transparency is critical.</p>
+</section>
+<section id="future-work" class="level3">
+<h3 class="anchored" data-anchor-id="future-work">Future Work</h3>
+<p>Future work could explore:</p>
+<ul>
+<li>Incorporating additional morphological features to improve classification between Versicolor and Virginica.</li>
+<li>Testing ensemble methods such as Random Forest or Gradient Boosted Trees for enhanced accuracy.</li>
+</ul>
+</section>
 </section>
 <section id="appendix" class="level2">
 <h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
@@ -1457,7 +1501,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2024-03-08'</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Example Paper"</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [Paper, Python, Dataviz]</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> /assets/Iris_pca.png</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "/assets/Iris_pca.png"</span></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="an">title-block-banner:</span><span class="co"> false</span></span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
@@ -1483,7 +1527,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> ydata_profiling <span class="im">as</span> yd</span>
 <span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pycaret.datasets <span class="im">import</span> get_data</span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pycaret.classification.functional <span class="im">import</span> setup, get_config, compare_models, create_model, pull, finalize_model, save_model, plot_model, evaluate_model</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pycaret.classification.functional <span class="im">import</span> setup, get_config, compare_models, create_model, pull, finalize_model, save_model, plot_model</span>
 <span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'font.family'</span>] <span class="op">=</span> <span class="st">'DeJavu Serif'</span></span>
@@ -1505,226 +1549,193 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="fu"># Classifying Irises by Field Measurements</span></span>
 <span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>*Classification is a machine learning technique used to predict group membership for data instances.</span>
-<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>The problem concerns the identification of IRIS plant species on the</span>
-<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>basis of plant attribute measurements. Classification of IRIS data set would be discovering patterns</span>
-<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>from examining petal and sepal size of the IRIS plant and how the prediction was made from analyzing the</span>
-<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>pattern to form the class of IRIS plant. By using this pattern and classification, it is possible to</span>
-<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>accurately predict the IRIS Species. Support Vector Machines (SVM) have been</span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>deployed to perform classification of datasets efficiently. In this work, dimensionality</span>
-<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>reduction techniques such as PCA will be used in conjunction with SVM to classify.*</span>
-<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
-<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>Bio-informatics is a promising and novel research area in the 21st century. This field is data</span>
-<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>driven and aims at understanding of relationships and gaining knowledge in biology. In order to</span>
-<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>extract this knowledge encoded in biological data, advanced computational technologies,</span>
-<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a>algorithms and tools need to be used. Basic problems in bio-informatics like protein structure</span>
-<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a>prediction, multiple alignments of sequences, phylogenic inferences, etc are inherently nondeterministic polynomial-time hard in nature. To solve these kinds of problems artificial</span>
-<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>intelligence (AI) methods offer a powerful and efficient approach. Researchers have used AI</span>
-<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a>techniques like Artificial Neural Networks (ANN), Fuzzy Logic, Genetic Algorithms, and</span>
-<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a>Support Vector Machines to solve problems in bio-informatics.</span>
-<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a>The concern of this study is towards the identification of IRIS plants on the basis of the</span>
-<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a>following measurements: sepal length, sepal width, petal length, and petal width.</span>
-<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a>This paper is mainly concerned with an analysis of the performance results of classification techniques</span>
-<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a>such as Decision Tree, Support Vector Machine (SVM) in determining the species of the Iris plants.</span>
-<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data</span></span>
-<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>One of the most popular and best known databases of the neural network application is the IRIS</span>
-<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a>plant data set which is obtained from UCI Machine Learning Repository and created by R.A.</span>
-<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a>Fisher while donated by Michael Marshall (MARSHALL%PLU@io.arc.nasa.gov) on July, 1988</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>*Classification is a fundamental machine learning technique used to predict the group membership of data instances based on input features. The Iris dataset, a well-known benchmark in machine learning, presents a classification challenge involving three species of the Iris plant based on sepal and petal measurements. This paper explores the application of Support Vector Machines (SVM) combined with Principal Component Analysis (PCA) for dimensionality reduction to enhance classification accuracy and interpretability. Performance metrics, including precision, recall, F1 score, and confusion matrices, are analyzed to evaluate model effectiveness. The study demonstrates that while SVM achieves high classification accuracy, Decision Trees provide greater interpretability, which is valuable for practical applications in biological classification.*</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>Bioinformatics is an emerging and rapidly evolving field focused on extracting meaningful insights from biological data using computational techniques. Fundamental challenges in bioinformatics, such as protein structure prediction, sequence alignment, and phylogenetic inference, are often computationally complex and classified as NP-hard problems. Machine learning (ML) methods, including Artificial Neural Networks (ANN), Fuzzy Logic, Genetic Algorithms, and Support Vector Machines (SVM), have shown promise in addressing these challenges.</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>This study focuses on classifying Iris species using measurements of sepal length, sepal width, petal length, and petal width. The Iris dataset, introduced by R.A. Fisher in 1936, has become a standard benchmark for classification models. The goal is to evaluate the effectiveness of SVM for classification and explore the impact of dimensionality reduction using PCA on model performance. Decision Tree models are also assessed for comparison, balancing accuracy with interpretability.</span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data</span></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>The Iris dataset, obtained from the UCI Machine Learning Repository, consists of 150 instances representing three species of Iris plants:</span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Iris Setosa</span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Iris Versicolor</span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Iris Virginica</span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>Each species is represented by 50 samples. The dataset includes four numeric attributes:</span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Sepal length (cm)</span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Sepal width (cm)</span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Petal length (cm)</span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Petal width (cm)</span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Iris Measures</span></span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> get_data(<span class="st">"iris"</span>)</span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a>decoder <span class="op">=</span> [<span class="st">'setosa'</span>, <span class="st">'versicolor'</span>, <span class="st">'virginica'</span>]</span>
+<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>The IRIS dataset classifies three different classes of IRIS plant by performing pattern</span>
-<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>classification. The IRIS data set includes three classes of 50 objects each, where each class</span>
-<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>refers to a type of IRIS plant. The attributed that already been predicted belongs to the class of</span>
-<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a>IRIS plant. The list of attributes present in the IRIS can be described as categorical, nominal and</span>
-<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>continuous. The experts have mentioned that there isn’t any missing value found in any attribute</span>
-<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a>of this data set. The data set is complete.</span>
-<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>This project makes use of the well known IRIS dataset, which refers to three classes of 50</span>
-<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a>instances each, where each class refers to a type of IRIS plant. The first of the classes is linearly</span>
-<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>distinguishable from the remaining two, with the second two not being linearly separable from</span>
-<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>each other. The 150 instances, which are equally separated between the three classes, contain the</span>
-<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a>following four numeric attributes:</span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>The fifth attribute is the class label indicating the species. The dataset is complete, with no missing values or inconsistencies reported. While the Setosa species is separable from the other two species, Versicolor and Virginica exhibit significant overlap, making classification the challenge of the study.</span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>A copy of the exploratory data report can be found here <span class="co">[</span><span class="ot">EDA Report</span><span class="co">](../../assets/Iris_EDA.html)</span></span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> data.profile_report(progress_bar<span class="op">=</span><span class="va">False</span>, title<span class="op">=</span><span class="st">"Iris EDA Report"</span>)</span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a>report.to_file(<span class="st">"../../assets/Iris_EDA.html"</span>, silent <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methods</span></span>
 <span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Iris Measures</span></span>
-<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> get_data(<span class="st">"iris"</span>)</span>
-<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>decoder <span class="op">=</span> [<span class="st">'setosa'</span>, <span class="st">'versicolor'</span>, <span class="st">'virginica'</span>]</span>
-<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>The fifth attribute is the predictive attributes which is the class attribute that means each instance</span>
-<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>also includes an identifying class name, each of which is one of the following: IRIS Setosa, IRIS</span>
-<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>Versicolour, or IRIS Virginica. A copy of the report can be found here <span class="co">[</span><span class="ot">EDA Report</span><span class="co">](../../assets/Iris_EDA.html)</span></span>
+<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a>Principal Component Analysis (PCA) is a widely used dimensionality reduction technique that can project data onto a lower-dimensional subspace while retaining the maximum variance. PCA helps reduce the computational complexity of the classification task, but more importantly in this instance, improves visualization.</span>
+<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>In this study, PCA reduces the four-dimensional Iris data into two principal components:</span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>First Principal Component: Accounts for the highest variance in the data.</span>
+<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Second Principal Component: Captures the next highest variance.</span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>env_pca <span class="op">=</span> setup(data, target<span class="op">=</span><span class="st">"species"</span>, train_size <span class="op">=</span> <span class="fl">.8</span>, session_id <span class="op">=</span> RANDOM_STATE, pca<span class="op">=</span><span class="va">True</span>, pca_components <span class="op">=</span> <span class="dv">2</span>, verbose <span class="op">=</span> <span class="va">False</span>, normalize <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> data.profile_report(progress_bar<span class="op">=</span><span class="va">False</span>, title<span class="op">=</span><span class="st">"Iris EDA Report"</span>)</span>
-<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>report.to_file(<span class="st">"../../assets/Iris_EDA.html"</span>, silent <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methods</span></span>
-<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a>Dimensionality reduction is a really important concept in Machine Learning since</span>
-<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>it reduces the number of features in a dataset and hence reduces the</span>
-<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a>computations needed to fit the model. **PCA** is one of the well known efficient</span>
-<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a>dimensionality reduction techniques. in this tutorial we will use PCA which</span>
-<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>compresses the data by projecting it to a new subspace that can help in reducing</span>
-<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a>the effect of the **curse of dimensionality**. Our dataset consists of</span>
-<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a>4 dimensions(4 features) so we will project it to a 2 dimensions space and</span>
-<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a>plot it for visualization.</span>
-<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>env_pca <span class="op">=</span> setup(data, target<span class="op">=</span><span class="st">"species"</span>, train_size <span class="op">=</span> <span class="fl">.8</span>, session_id <span class="op">=</span> RANDOM_STATE, pca<span class="op">=</span><span class="va">True</span>, pca_components <span class="op">=</span> <span class="dv">2</span>, verbose <span class="op">=</span> <span class="va">False</span>, normalize <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Reduced Dimension Measurements</span></span>
-<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>env_pca.X_transformed.head()</span>
-<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a>The first principle component has the highest explained variance, followed by the 2nd component. By plotting these 2 components, we get a view of the 4 dimensions with as much explained variance as possible for a linear transformation. Although not a guarantee to be beneficial, often as in this case, clear separation of the target class can be observed in the transformed subspace.</span>
-<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> env_pca.pipeline.named_steps[<span class="st">"pca"</span>].transformer</span>
-<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(env_pca.X_transformed, x<span class="op">=</span><span class="st">"pca0"</span>, y<span class="op">=</span><span class="st">"pca1"</span>, hue<span class="op">=</span>data[<span class="st">"species"</span>]).<span class="bu">set</span>(title<span class="op">=</span><span class="st">"IRIS Species Scatter Plot </span><span class="ch">\n</span><span class="st"> Explained Variance: </span><span class="sc">%.3f</span><span class="st">"</span> <span class="op">%</span> pca.explained_variance_ratio_.<span class="bu">sum</span>())</span>
-<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a><span class="fu">### Feature Importance</span></span>
-<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a>While PCA is great for dimensionality reduction and visualization, we do lose some interpretability in how the scientific measurements are correlated to the target species. For this, we look at feature rank and feature importance charts to determine the measurements most affecting the separation between classes.</span>
-<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a>env_norm <span class="op">=</span> setup(data, target<span class="op">=</span><span class="st">"species"</span>, train_size <span class="op">=</span> <span class="fl">.8</span>, session_id <span class="op">=</span> RANDOM_STATE, verbose <span class="op">=</span> <span class="va">False</span>, normalize<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: </span></span>
-<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Pairwise Feature Correlation"</span></span>
-<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Target Correlation"</span></span>
-<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> rank2d(get_config(<span class="st">"X_train"</span>), get_config(<span class="st">"y_train"</span>))</span>
-<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> yb.target.feature_correlation.feature_correlation(env_norm.X_train, env_norm.y_train, method<span class="op">=</span><span class="st">'mutual_info-classification'</span>)</span>
-<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
-<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a>Standard practice is to perform train test split on the transformed data to evaluate the model performance.</span>
-<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>We will use the convention that splits the data in 80% training/validation and 20% test set.</span>
-<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>Because the sample size is relatively small, we will use cross validation to prevent overfitting.</span>
-<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>We set the random state to a constant value in order to get consistent results when we rerun the code.</span>
-<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>The advantages of this technique are the ability to limit overfitting on a relatively small dataset.</span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Reduced Dimension Measurements</span></span>
+<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a>env_pca.X_transformed.head()</span>
+<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>By plotting the data along these two principal components, a clear separation between the Setosa species and the other two species becomes visible. However, Versicolor and Virginica still exhibit considerable overlap.</span>
+<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> env_pca.pipeline.named_steps[<span class="st">"pca"</span>].transformer</span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(env_pca.X_transformed, x<span class="op">=</span><span class="st">"pca0"</span>, y<span class="op">=</span><span class="st">"pca1"</span>, hue<span class="op">=</span>data[<span class="st">"species"</span>]).<span class="bu">set</span>(title<span class="op">=</span><span class="st">"IRIS Species Scatter Plot </span><span class="ch">\n</span><span class="st"> Explained Variance: </span><span class="sc">%.3f</span><span class="st">"</span> <span class="op">%</span> pca.explained_variance_ratio_.<span class="bu">sum</span>())</span>
+<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### Feature Importance</span></span>
+<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a>While PCA is great for dimensionality reduction and visualization, we do lose some interpretability in how the scientific measurements are correlated to the target species. For this, we look at feature rank and feature importance charts to determine the measurements most affecting the separation between classes.</span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>env_norm <span class="op">=</span> setup(data, target<span class="op">=</span><span class="st">"species"</span>, train_size <span class="op">=</span> <span class="fl">.8</span>, session_id <span class="op">=</span> RANDOM_STATE, verbose <span class="op">=</span> <span class="va">False</span>, normalize<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: </span></span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Pairwise Feature Correlation"</span></span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - "Target Correlation"</span></span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> rank2d(get_config(<span class="st">"X_train"</span>), get_config(<span class="st">"y_train"</span>))</span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> yb.target.feature_correlation.feature_correlation(env_norm.X_train, env_norm.y_train, method<span class="op">=</span><span class="st">'mutual_info-classification'</span>)</span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>Standard practice is to perform train test split on the transformed data to evaluate the model performance.</span>
+<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a>We will use the convention that splits the data in 80% training/validation and 20% test set.</span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a>Because the sample size is relatively small, we will use cross validation to prevent overfitting.</span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a>The advantages of this technique are the ability to limit overfitting on a relatively small dataset.</span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> yb.target.class_balance(env_norm.y_train, env_norm.y_test, labels <span class="op">=</span> decoder)</span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analysis</span></span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a>The models were evaluated using an 80/20 train-test split with five-fold cross-validation to mitigate overfitting. Evaluation metrics included:</span>
+<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Precision – The proportion of correct positive predictions.</span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Recall – The proportion of actual positives correctly identified.</span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>F1 Score – The harmonic mean of precision and recall, providing a balanced measure of model accuracy.</span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Confusion Matrix - Illustrates misclassification patterns across species.</span>
+<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a><span class="fu">### Classification by Support Vector Machine </span></span>
+<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a>Support Vector Machines (SVM) are effective for high-dimensional classification problems. SVM constructs a hyperplane in a multi-dimensional space that maximally separates the classes. In cases where the data is not linearly separable, SVM employs a kernel trick to map the data into a higher-dimensional space where linear separation becomes possible. </span>
+<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Cross Validation Results</span></span>
+<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>svm_model <span class="op">=</span> create_model(<span class="st">"svm"</span>, tol<span class="op">=</span><span class="fl">1e-3</span>, alpha<span class="op">=</span><span class="fl">.0012</span>, verbose<span class="op">=</span><span class="va">False</span>) <span class="co"># parameters can be found with tune_model</span></span>
+<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>pull()</span>
+<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> yb.target.class_balance(env_norm.y_train, env_norm.y_test, labels <span class="op">=</span> decoder)</span>
-<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analysis</span></span>
-<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a>In this section, we analyze how our primary models performed,</span>
-<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a>and discuss reasons why they did not perform even</span>
-<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a>better. Specifically, we will analyze why certain species were</span>
-<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a>commonly confused with others. Confusing **versicolor** and **virginica**</span>
-<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a>is understandable based on the boundary overlap in the PCA analysis.</span>
-<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a>The results of the SVM model on unseen data are measured on the f1 score, a</span>
-<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a>geometric mean of the precision and recall scores. This measure is considered</span>
-<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a>a more realistic measure of the overall accuracy of the classification model. Of interest is the variation in performance on each cross validation run. A standard deviation in the range of 5%-10% may see performance results on test or production data far inferior than what is reported in validation. </span>
-<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a><span class="fu">### Comparison to Decision Tree</span></span>
+<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a>A Decision Tree classifier was used as a benchmark to compare with the SVM model. Decision Trees provide an interpretable model by recursively splitting the data based on the most informative features. The tree structure allows for straightforward interpretation of how classifications are made.</span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a>tree_model <span class="op">=</span> create_model(<span class="st">"dt"</span>, max_depth<span class="op">=</span><span class="dv">3</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a>winning_model <span class="op">=</span> compare_models(include<span class="op">=</span>[svm_model, tree_model], verbose <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a>pull()</span>
+<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a>::: {#fig-metrics layout-ncol=2}</span>
+<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_model(svm_model, plot <span class="op">=</span> <span class="st">"confusion_matrix"</span>, plot_kwargs <span class="op">=</span> {<span class="st">"classes"</span>: decoder})</span>
+<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Cross Validation Results</span></span>
-<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a><span class="co"># Modeling</span></span>
-<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a>svm_model <span class="op">=</span> create_model(<span class="st">"svm"</span>, tol<span class="op">=</span><span class="fl">1e-3</span>, alpha<span class="op">=</span><span class="fl">.0012</span>, verbose<span class="op">=</span><span class="va">False</span>) <span class="co"># parameters can be found with tune_model</span></span>
-<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a>pull()</span>
-<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a>For comparison, a simple decision tree was trained as well. The following metrics demonstrate the varying performance on each class of the models. Standard metrics for classification are precision, recall and f1 score for each class as well as a confusion matrix. A ROC curve would also be included to demonstrate how the model performance can very even within a confusion matrix if you take into account a rank function. Such a rank function is generally only available for models as using probability based classification such as logistic regression.</span>
-<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a>tree_model <span class="op">=</span> create_model(<span class="st">"dt"</span>, max_depth<span class="op">=</span><span class="dv">3</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a>winning_model <span class="op">=</span> compare_models(include<span class="op">=</span>[svm_model, tree_model], verbose <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a>pull()</span>
-<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a>Most sources would indicate at this point to choose the best performing model and then run a test on the holdout dataset. It is important to make a model selection before running a holdout test as the performance results of each model may vary on the holdout set and the winning model may change. Because the purpose of the holdout set is to evaluate a model on unseen data, we cannot retroactively choose the best model for said test. </span>
-<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a>For demonstration purposes, the performance results for both SVM and Decision Tree on the test set are shown. In the next section, we explain why we may choose a certain model even if inferior in performance.</span>
-<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_model(tree_model, plot <span class="op">=</span> <span class="st">"confusion_matrix"</span>, plot_kwargs <span class="op">=</span> {<span class="st">"classes"</span>: decoder})</span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_model(svm_model, plot <span class="op">=</span> <span class="st">"class_report"</span>, plot_kwargs <span class="op">=</span> {<span class="st">"classes"</span>: decoder})</span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_model(tree_model, plot <span class="op">=</span> <span class="st">"class_report"</span>, plot_kwargs <span class="op">=</span> {<span class="st">"classes"</span>: decoder})</span>
+<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a>The Decision Tree model achieved comparable performance, almost identical to the Support Vector Machine. This is a common phenomenon in machine learning applications and often greatly ignored by auto=ml packages. Decision Trees, provide a more transparent decision-making process, which is valuable for field applications where understanding the classification process is essential.</span>
+<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> save_model(svm_model, <span class="st">"models/svm-model"</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> save_model(tree_model, <span class="st">"models/tree-model"</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a>::: {#fig-metrics layout-ncol=2}</span>
-<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_model(svm_model, plot <span class="op">=</span> <span class="st">"confusion_matrix"</span>, plot_kwargs <span class="op">=</span> {<span class="st">"classes"</span>: decoder})</span>
-<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_model(tree_model, plot <span class="op">=</span> <span class="st">"confusion_matrix"</span>, plot_kwargs <span class="op">=</span> {<span class="st">"classes"</span>: decoder})</span>
-<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_model(svm_model, plot <span class="op">=</span> <span class="st">"class_report"</span>, plot_kwargs <span class="op">=</span> {<span class="st">"classes"</span>: decoder})</span>
-<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_model(tree_model, plot <span class="op">=</span> <span class="st">"class_report"</span>, plot_kwargs <span class="op">=</span> {<span class="st">"classes"</span>: decoder})</span>
-<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model Interpretability</span></span>
+<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a>A simple decision tree can be printed out as a flowchart or a series of branching yes/no questions, making it easy to use in field work where quick decisions are necessary. Each node in the tree represents a question based on a specific feature, such as "Is petal length greater than 2.5 cm?" The branches lead to subsequent questions or to a classification decision, such as identifying the plant as Setosa or Versicolor. This format allows field researchers to visually trace the decision path step-by-step, even without access to computational tools. The straightforward structure of a decision tree makes it easy to understand and follow, enabling non-experts to accurately classify samples based on observable characteristics. The transparency and simplicity of the printed decision tree make it particularly valuable for practical applications in biological fieldwork.</span>
+<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a><span class="co"># Build a model on the final data for deployment.</span></span>
+<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a>env_prod <span class="op">=</span> setup(data, target<span class="op">=</span><span class="st">"species"</span>, train_size <span class="op">=</span> <span class="fl">.8</span>, session_id <span class="op">=</span> RANDOM_STATE, verbose <span class="op">=</span> <span class="va">False</span>) <span class="co"># trees don't need normalization</span></span>
+<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a>final_tree <span class="op">=</span> finalize_model(tree_model)</span>
+<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> save_model(final_tree, <span class="st">"models/production-model"</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize predictions</span></span>
+<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> env_prod.X_transformed.iloc[<span class="dv">120</span>] </span>
+<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a>final_tree_model <span class="op">=</span> final_tree.named_steps[<span class="st">'actual_estimator'</span>]</span>
+<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a>viz_model <span class="op">=</span>  dtreeviz.model(final_tree_model, X_train<span class="op">=</span>env_prod.X_transformed, y_train <span class="op">=</span> env_prod.y_transformed, feature_names <span class="op">=</span> <span class="bu">list</span>(env_prod.X_transformed), target_name <span class="op">=</span> <span class="st">"species name"</span>, class_names <span class="op">=</span> decoder)</span>
+<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a>viz_model.view(x <span class="op">=</span> sample, fontname<span class="op">=</span><span class="st">"DejaVu Sans"</span>)</span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> save_model(svm_model, <span class="st">"models/svm-model"</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> save_model(tree_model, <span class="st">"models/tree-model"</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a>In-case displaying the entire tree is not desirable especially in regulatory environments, we can instead display the list of features and their importance related to the decision. </span>
+<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a>viz_model.instance_feature_importance(sample, fontname<span class="op">=</span><span class="st">"DejaVu Sans"</span>)</span>
 <span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model Interpretability</span></span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
 <span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>Unfortunately SVM uses a higher dimensional space to linearly slice the sample space into class specific hyperplanes. Visualizing how this is down is difficult, but understood well geometrically. However, the decision tree can easily be visualized and explain the predictive power of the model on the test set. This example shows a mislabeled iris, but more importantly demonstrates how that incorrect result was obtained. </span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a><span class="fu">### Discussion</span></span>
 <span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a><span class="co"># Build a model on the final data for deployment.</span></span>
-<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a>env_prod <span class="op">=</span> setup(data, target<span class="op">=</span><span class="st">"species"</span>, train_size <span class="op">=</span> <span class="fl">.8</span>, session_id <span class="op">=</span> RANDOM_STATE, verbose <span class="op">=</span> <span class="va">False</span>) <span class="co"># trees don't need normalization</span></span>
-<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a>final_tree <span class="op">=</span> finalize_model(tree_model)</span>
-<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> save_model(final_tree, <span class="st">"models/production-model"</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize predictions</span></span>
-<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> env_prod.X_transformed.iloc[<span class="dv">120</span>] </span>
-<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a>final_tree_model <span class="op">=</span> final_tree.named_steps[<span class="st">'actual_estimator'</span>]</span>
-<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a>viz_model <span class="op">=</span>  dtreeviz.model(final_tree_model, X_train<span class="op">=</span>env_prod.X_transformed, y_train <span class="op">=</span> env_prod.y_transformed, feature_names <span class="op">=</span> <span class="bu">list</span>(env_prod.X_transformed), target_name <span class="op">=</span> <span class="st">"species name"</span>, class_names <span class="op">=</span> decoder)</span>
-<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a>viz_model.view(x <span class="op">=</span> sample, fontname<span class="op">=</span><span class="st">"DejaVu Sans"</span>)</span>
-<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a>In-case displaying the entire tree is not desirable especially in regulatory environemts, we can instead display the list of features and their importance related to the decision. </span>
-<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a>viz_model.instance_feature_importance(sample, fontname<span class="op">=</span><span class="st">"DejaVu Sans"</span>)</span>
-<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a><span class="co">#explanation = eli5.explain_prediction(final_tree, env_prod.X.iloc[106], target_names = decoder)</span></span>
-<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a><span class="co">#print(eli5.format_as_text(explanation), f"True Class: {decoder[env_prod.y[106]]}")</span></span>
-<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
-<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a>We have constructed a relatively accurate classifier for species of</span>
-<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a>Iris flowers based on the field measurements. Using PCA analysis to visualize the data</span>
-<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a>there were clear segments that could be made to classify the various species.</span>
-<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a>Feeding this data into a Support Vector Machine (SVM), we were able to achieve</span>
-<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a>a relatively high F1 score with cross validation as well as the test set, thus confirming validation results.</span>
-<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a>Similarly great results were shown for the Decision Tree model as well.</span>
-<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a>Because SVM is difficult to perform in the fields, and PCA transforms the data</span>
-<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a>into features that represent eigenvectors, this method will prove difficult to</span>
-<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a>interpret as simple rules of known biological dimensions. For field use, it</span>
-<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a>will be of interest to use other</span>
-<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a>classification methods such as decision tree that is</span>
-<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a>both as accurate if not more soe than SVM and easier to use and understand in the field for biological classification.</span>
-<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a>Of further interest is the closeness of the **versicolor** and **virginica**</span>
-<span id="cb18-307"><a href="#cb18-307" aria-hidden="true" tabindex="-1"></a>species with regard to the field measurements. Future studies may explore finding another measure to help differentiate them more as we see there is some similarities in their measurements. This would greatly increase the performance of any model for the purpose of classification. </span>
-<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a><span class="fu">## Appendix</span></span>
-<span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a>The entire website, including this example project is located at <span class="co">[</span><span class="ot">https://github.com/joshuacharleshyatt/personal</span><span class="co">](https://github.com/joshuacharleshyatt/personal)</span></span>
+<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a>Misclassification between Versicolor and Virginica reflects the biological similarities in their sepal and petal measurements. Future research could explore additional botanical features or incorporate other ML techniques, such as ensemble methods or deep learning, to improve discrimination between these species.</span>
+<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a>SVM remains a powerful classification tool for complex, high-dimensional datasets. However, the increased interpretability of Decision Trees suggests that they may be more suitable for practical, real-world applications in biological research.</span>
+<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conclusion</span></span>
+<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a>This study demonstrates the effectiveness of SVM in classifying Iris species based on sepal and petal measurements. PCA successfully reduced the data dimensionality, improving visualization. SVM achieves high accuracy, however, the interpretability of Decision Trees makes them a valuable alternative for practical applications where model transparency is critical.</span>
+<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a><span class="fu">### Future Work</span></span>
+<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a>Future work could explore:</span>
+<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Incorporating additional morphological features to improve classification between Versicolor and Virginica.</span>
+<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>Testing ensemble methods such as Random Forest or Gradient Boosted Trees for enhanced accuracy.</span>
+<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a><span class="fu">## Appendix</span></span>
+<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a>The entire website, including this example project is located at <span class="co">[</span><span class="ot">https://github.com/joshuacharleshyatt/personal</span><span class="co">](https://github.com/joshuacharleshyatt/personal)</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

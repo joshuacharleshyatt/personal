@@ -2,7 +2,7 @@
 date: '2024-03-08'
 title: "Example Paper"
 categories: [Paper, Python, Dataviz]
-image: /assets/Iris_pca.png
+image: "/assets/Iris_pca.png"
 title-block-banner: false
 format:
   html:
@@ -28,7 +28,7 @@ with redirect_stdout(f):
   import ydata_profiling as yd
 
 from pycaret.datasets import get_data
-from pycaret.classification.functional import setup, get_config, compare_models, create_model, pull, finalize_model, save_model, plot_model, evaluate_model
+from pycaret.classification.functional import setup, get_config, compare_models, create_model, pull, finalize_model, save_model, plot_model
 import seaborn as sns
 import matplotlib.pyplot as plt
 plt.rcParams['font.family'] = 'DeJavu Serif'
@@ -50,50 +50,28 @@ RANDOM_STATE = RandomState(PROJECT_NAME).state
 
 # Classifying Irises by Field Measurements
 
-*Classification is a machine learning technique used to predict group membership for data instances.
-The problem concerns the identification of IRIS plant species on the
-basis of plant attribute measurements. Classification of IRIS data set would be discovering patterns
-from examining petal and sepal size of the IRIS plant and how the prediction was made from analyzing the
-pattern to form the class of IRIS plant. By using this pattern and classification, it is possible to
-accurately predict the IRIS Species. Support Vector Machines (SVM) have been
-deployed to perform classification of datasets efficiently. In this work, dimensionality
-reduction techniques such as PCA will be used in conjunction with SVM to classify.*
+*Classification is a fundamental machine learning technique used to predict the group membership of data instances based on input features. The Iris dataset, a well-known benchmark in machine learning, presents a classification challenge involving three species of the Iris plant based on sepal and petal measurements. This paper explores the application of Support Vector Machines (SVM) combined with Principal Component Analysis (PCA) for dimensionality reduction to enhance classification accuracy and interpretability. Performance metrics, including precision, recall, F1 score, and confusion matrices, are analyzed to evaluate model effectiveness. The study demonstrates that while SVM achieves high classification accuracy, Decision Trees provide greater interpretability, which is valuable for practical applications in biological classification.*
 
 ## Introduction
 
-Bio-informatics is a promising and novel research area in the 21st century. This field is data
-driven and aims at understanding of relationships and gaining knowledge in biology. In order to
-extract this knowledge encoded in biological data, advanced computational technologies,
-algorithms and tools need to be used. Basic problems in bio-informatics like protein structure
-prediction, multiple alignments of sequences, phylogenic inferences, etc are inherently nondeterministic polynomial-time hard in nature. To solve these kinds of problems artificial
-intelligence (AI) methods offer a powerful and efficient approach. Researchers have used AI
-techniques like Artificial Neural Networks (ANN), Fuzzy Logic, Genetic Algorithms, and
-Support Vector Machines to solve problems in bio-informatics.
+Bioinformatics is an emerging and rapidly evolving field focused on extracting meaningful insights from biological data using computational techniques. Fundamental challenges in bioinformatics, such as protein structure prediction, sequence alignment, and phylogenetic inference, are often computationally complex and classified as NP-hard problems. Machine learning (ML) methods, including Artificial Neural Networks (ANN), Fuzzy Logic, Genetic Algorithms, and Support Vector Machines (SVM), have shown promise in addressing these challenges.
 
-The concern of this study is towards the identification of IRIS plants on the basis of the
-following measurements: sepal length, sepal width, petal length, and petal width.
-This paper is mainly concerned with an analysis of the performance results of classification techniques
-such as Decision Tree, Support Vector Machine (SVM) in determining the species of the Iris plants.
+This study focuses on classifying Iris species using measurements of sepal length, sepal width, petal length, and petal width. The Iris dataset, introduced by R.A. Fisher in 1936, has become a standard benchmark for classification models. The goal is to evaluate the effectiveness of SVM for classification and explore the impact of dimensionality reduction using PCA on model performance. Decision Tree models are also assessed for comparison, balancing accuracy with interpretability.
 
 ## Data
 
-One of the most popular and best known databases of the neural network application is the IRIS
-plant data set which is obtained from UCI Machine Learning Repository and created by R.A.
-Fisher while donated by Michael Marshall (MARSHALL%PLU@io.arc.nasa.gov) on July, 1988
+The Iris dataset, obtained from the UCI Machine Learning Repository, consists of 150 instances representing three species of Iris plants:
 
-The IRIS dataset classifies three different classes of IRIS plant by performing pattern
-classification. The IRIS data set includes three classes of 50 objects each, where each class
-refers to a type of IRIS plant. The attributed that already been predicted belongs to the class of
-IRIS plant. The list of attributes present in the IRIS can be described as categorical, nominal and
-continuous. The experts have mentioned that there isn’t any missing value found in any attribute
-of this data set. The data set is complete.
+ - Iris Setosa
+ - Iris Versicolor
+ - Iris Virginica
 
-This project makes use of the well known IRIS dataset, which refers to three classes of 50
-instances each, where each class refers to a type of IRIS plant. The first of the classes is linearly
-distinguishable from the remaining two, with the second two not being linearly separable from
-each other. The 150 instances, which are equally separated between the three classes, contain the
-following four numeric attributes:
+Each species is represented by 50 samples. The dataset includes four numeric attributes:
 
+ - Sepal length (cm)
+ - Sepal width (cm)
+ - Petal length (cm)
+ - Petal width (cm)
 
 ```{python}
 #| tbl-cap: Iris Measures
@@ -101,9 +79,8 @@ data = get_data("iris")
 decoder = ['setosa', 'versicolor', 'virginica']
 ```
 
-The fifth attribute is the predictive attributes which is the class attribute that means each instance
-also includes an identifying class name, each of which is one of the following: IRIS Setosa, IRIS
-Versicolour, or IRIS Virginica. A copy of the report can be found here [EDA Report](../../assets/Iris_EDA.html)
+The fifth attribute is the class label indicating the species. The dataset is complete, with no missing values or inconsistencies reported. While the Setosa species is separable from the other two species, Versicolor and Virginica exhibit significant overlap, making classification the challenge of the study.
+A copy of the exploratory data report can be found here [EDA Report](../../assets/Iris_EDA.html)
 
 
 ```{python}
@@ -113,14 +90,12 @@ report.to_file("../../assets/Iris_EDA.html", silent = True)
 
 ## Methods
 
-Dimensionality reduction is a really important concept in Machine Learning since
-it reduces the number of features in a dataset and hence reduces the
-computations needed to fit the model. **PCA** is one of the well known efficient
-dimensionality reduction techniques. in this tutorial we will use PCA which
-compresses the data by projecting it to a new subspace that can help in reducing
-the effect of the **curse of dimensionality**. Our dataset consists of
-4 dimensions(4 features) so we will project it to a 2 dimensions space and
-plot it for visualization.
+Principal Component Analysis (PCA) is a widely used dimensionality reduction technique that can project data onto a lower-dimensional subspace while retaining the maximum variance. PCA helps reduce the computational complexity of the classification task, but more importantly in this instance, improves visualization.
+
+In this study, PCA reduces the four-dimensional Iris data into two principal components:
+
+ - First Principal Component: Accounts for the highest variance in the data.
+ - Second Principal Component: Captures the next highest variance.
 
 ```{python}
 env_pca = setup(data, target="species", train_size = .8, session_id = RANDOM_STATE, pca=True, pca_components = 2, verbose = False, normalize = True)
@@ -131,7 +106,7 @@ env_pca = setup(data, target="species", train_size = .8, session_id = RANDOM_STA
 env_pca.X_transformed.head()
 ```
 
-The first principle component has the highest explained variance, followed by the 2nd component. By plotting these 2 components, we get a view of the 4 dimensions with as much explained variance as possible for a linear transformation. Although not a guarantee to be beneficial, often as in this case, clear separation of the target class can be observed in the transformed subspace.
+By plotting the data along these two principal components, a clear separation between the Setosa species and the other two species becomes visible. However, Versicolor and Virginica still exhibit considerable overlap.
 
 ```{python}
 pca = env_pca.pipeline.named_steps["pca"].transformer
@@ -159,7 +134,6 @@ fig = yb.target.feature_correlation.feature_correlation(env_norm.X_train, env_no
 Standard practice is to perform train test split on the transformed data to evaluate the model performance.
 We will use the convention that splits the data in 80% training/validation and 20% test set.
 Because the sample size is relatively small, we will use cross validation to prevent overfitting.
-We set the random state to a constant value in order to get consistent results when we rerun the code.
 The advantages of this technique are the ability to limit overfitting on a relatively small dataset.
 
 ```{python}
@@ -167,38 +141,32 @@ fig = yb.target.class_balance(env_norm.y_train, env_norm.y_test, labels = decode
 ```
 
 ## Analysis
+The models were evaluated using an 80/20 train-test split with five-fold cross-validation to mitigate overfitting. Evaluation metrics included:
 
-In this section, we analyze how our primary models performed,
-and discuss reasons why they did not perform even
-better. Specifically, we will analyze why certain species were
-commonly confused with others. Confusing **versicolor** and **virginica**
-is understandable based on the boundary overlap in the PCA analysis.
+ - Precision – The proportion of correct positive predictions.
+ - Recall – The proportion of actual positives correctly identified.
+ - F1 Score – The harmonic mean of precision and recall, providing a balanced measure of model accuracy.
+ - Confusion Matrix - Illustrates misclassification patterns across species.
 
-The results of the SVM model on unseen data are measured on the f1 score, a
-geometric mean of the precision and recall scores. This measure is considered
-a more realistic measure of the overall accuracy of the classification model. Of interest is the variation in performance on each cross validation run. A standard deviation in the range of 5%-10% may see performance results on test or production data far inferior than what is reported in validation. 
+### Classification by Support Vector Machine 
+
+Support Vector Machines (SVM) are effective for high-dimensional classification problems. SVM constructs a hyperplane in a multi-dimensional space that maximally separates the classes. In cases where the data is not linearly separable, SVM employs a kernel trick to map the data into a higher-dimensional space where linear separation becomes possible. 
 
 ```{python}
 #| tbl-cap: Cross Validation Results
-
-# Modeling
 svm_model = create_model("svm", tol=1e-3, alpha=.0012, verbose=False) # parameters can be found with tune_model
 pull()
 ```
 
-For comparison, a simple decision tree was trained as well. The following metrics demonstrate the varying performance on each class of the models. Standard metrics for classification are precision, recall and f1 score for each class as well as a confusion matrix. A ROC curve would also be included to demonstrate how the model performance can very even within a confusion matrix if you take into account a rank function. Such a rank function is generally only available for models as using probability based classification such as logistic regression.
+### Comparison to Decision Tree
 
+A Decision Tree classifier was used as a benchmark to compare with the SVM model. Decision Trees provide an interpretable model by recursively splitting the data based on the most informative features. The tree structure allows for straightforward interpretation of how classifications are made.
 
 ```{python}
 tree_model = create_model("dt", max_depth=3, verbose = False)
 winning_model = compare_models(include=[svm_model, tree_model], verbose = False)
 pull()
 ```
-
-Most sources would indicate at this point to choose the best performing model and then run a test on the holdout dataset. It is important to make a model selection before running a holdout test as the performance results of each model may vary on the holdout set and the winning model may change. Because the purpose of the holdout set is to evaluate a model on unseen data, we cannot retroactively choose the best model for said test. 
-
-For demonstration purposes, the performance results for both SVM and Decision Tree on the test set are shown. In the next section, we explain why we may choose a certain model even if inferior in performance.
-
 
 ::: {#fig-metrics layout-ncol=2}
 ```{python}
@@ -215,6 +183,7 @@ fig = plot_model(tree_model, plot = "class_report", plot_kwargs = {"classes": de
 ```
 :::
 
+The Decision Tree model achieved comparable performance, almost identical to the Support Vector Machine. This is a common phenomenon in machine learning applications and often greatly ignored by auto=ml packages. Decision Trees, provide a more transparent decision-making process, which is valuable for field applications where understanding the classification process is essential.
 
 ```{python}
 message = save_model(svm_model, "models/svm-model", verbose = False)
@@ -223,7 +192,7 @@ message = save_model(tree_model, "models/tree-model", verbose = False)
 
 ### Model Interpretability
 
-Unfortunately SVM uses a higher dimensional space to linearly slice the sample space into class specific hyperplanes. Visualizing how this is down is difficult, but understood well geometrically. However, the decision tree can easily be visualized and explain the predictive power of the model on the test set. This example shows a mislabeled iris, but more importantly demonstrates how that incorrect result was obtained. 
+A simple decision tree can be printed out as a flowchart or a series of branching yes/no questions, making it easy to use in field work where quick decisions are necessary. Each node in the tree represents a question based on a specific feature, such as "Is petal length greater than 2.5 cm?" The branches lead to subsequent questions or to a classification decision, such as identifying the plant as Setosa or Versicolor. This format allows field researchers to visually trace the decision path step-by-step, even without access to computational tools. The straightforward structure of a decision tree makes it easy to understand and follow, enabling non-experts to accurately classify samples based on observable characteristics. The transparency and simplicity of the printed decision tree make it particularly valuable for practical applications in biological fieldwork.
 
 ```{python}
 # Build a model on the final data for deployment.
@@ -240,32 +209,30 @@ viz_model =  dtreeviz.model(final_tree_model, X_train=env_prod.X_transformed, y_
 viz_model.view(x = sample, fontname="DejaVu Sans")
 ```
 
-In-case displaying the entire tree is not desirable especially in regulatory environemts, we can instead display the list of features and their importance related to the decision. 
+In-case displaying the entire tree is not desirable especially in regulatory environments, we can instead display the list of features and their importance related to the decision. 
 
 ```{python}
 viz_model.instance_feature_importance(sample, fontname="DejaVu Sans")
-#explanation = eli5.explain_prediction(final_tree, env_prod.X.iloc[106], target_names = decoder)
-#print(eli5.format_as_text(explanation), f"True Class: {decoder[env_prod.y[106]]}")
 ```
 
 ## Conclusion
-We have constructed a relatively accurate classifier for species of
-Iris flowers based on the field measurements. Using PCA analysis to visualize the data
-there were clear segments that could be made to classify the various species.
-Feeding this data into a Support Vector Machine (SVM), we were able to achieve
-a relatively high F1 score with cross validation as well as the test set, thus confirming validation results.
-Similarly great results were shown for the Decision Tree model as well.
 
-Because SVM is difficult to perform in the fields, and PCA transforms the data
-into features that represent eigenvectors, this method will prove difficult to
-interpret as simple rules of known biological dimensions. For field use, it
-will be of interest to use other
-classification methods such as decision tree that is
-both as accurate if not more soe than SVM and easier to use and understand in the field for biological classification.
+### Discussion
 
-Of further interest is the closeness of the **versicolor** and **virginica**
-species with regard to the field measurements. Future studies may explore finding another measure to help differentiate them more as we see there is some similarities in their measurements. This would greatly increase the performance of any model for the purpose of classification. 
+Misclassification between Versicolor and Virginica reflects the biological similarities in their sepal and petal measurements. Future research could explore additional botanical features or incorporate other ML techniques, such as ensemble methods or deep learning, to improve discrimination between these species.
 
+SVM remains a powerful classification tool for complex, high-dimensional datasets. However, the increased interpretability of Decision Trees suggests that they may be more suitable for practical, real-world applications in biological research.
+
+### Conclusion
+
+This study demonstrates the effectiveness of SVM in classifying Iris species based on sepal and petal measurements. PCA successfully reduced the data dimensionality, improving visualization. SVM achieves high accuracy, however, the interpretability of Decision Trees makes them a valuable alternative for practical applications where model transparency is critical.
+
+### Future Work
+
+Future work could explore:
+
+ - Incorporating additional morphological features to improve classification between Versicolor and Virginica.
+ - Testing ensemble methods such as Random Forest or Gradient Boosted Trees for enhanced accuracy.
 
 ## Appendix
 

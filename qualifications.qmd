@@ -42,7 +42,7 @@ gantt
 
 ### Data Scientist III
 ::: {.callout-note icon=false}
-#### Denso International America, INC. Maryville, TN	July 2018 – Present
+#### DENSO International America, INC. Maryville, TN	July 2018 – Present
 
 Leverage analytical and programming skills to extract insights from complex datasets to inform strategic decision-making.  Utilize statistical techniques, machine learning algorithms, and data visualization tools to interpret data and solve business problems.Responsibilities include: data cleaning, modeling, deployment, and presenting findings to executive stakeholders. 
 
@@ -59,7 +59,7 @@ Leverage analytical and programming skills to extract insights from complex data
 ::: {.callout-note icon=false}
 #### Elavon Knoxville, TN Nov 2015 – July 2018
 
-Appropriately assigned high-risk fraud accounts to work queues, managed backend relational databases, and provided analytical reporting needs to management.
+Appropriately assigned high-risk fraud accounts to work queues, managed back-end relational databases, and provided analytical reporting needs to management.
 
 - Increased the efficiency of managing work queues by accurately identifying fraud, resulting in $200,000+ additional dollars saved compared to the prior 2-year average.
 - Developed an application utilizing web scraping that improved the efficiency of identifying and notating potentially risky accounts by 50%. Estimated savings of $25,000-$50,000 annually.
@@ -112,7 +112,7 @@ mindmap
 ### Analytics
 -	[X] Natural Language Processing (Word and Sentence embedding, Sentiment Analysis)
 -	[X] Anomaly Detection (Auto-Encoders, One Class SVM, Local Outlier Factor, PCA)
--	[X] Convolutional Neural Networks (Auto-Encoders, U-net, Image Imbedding)
+-	[X] Convolutional Neural Networks (Auto-Encoders, U-net, Image Embedding)
 -	[X] BI (Tableau, DOMO)
 -	[X] Literate Programming (Jupyter Notebooks, Quarto, Codebraid)
 

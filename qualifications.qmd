@@ -36,8 +36,8 @@ gantt
     Masters           :done, e2, after e1, 2y
   section Work Experience
     Pellissippi State :done, w1, after e2, 2y
-    Elavon            :done, w2, after w1, 5y
-    DENSO             :active, w3, after w2, 6y
+    Elavon            :done, w2, after w1, 3y
+    DENSO             :active, w3, after w2, 7y
 ```
 
 ### Data Scientist III

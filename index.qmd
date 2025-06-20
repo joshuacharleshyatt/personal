@@ -21,6 +21,5 @@ comments: false
 
 ## About Me
 
-I have more than 5 years of experience working as a Data Scientist and many more years developing technical solutions for multinational companies. I have worked in the Finance, Automotive, and Education industries, applying my expertise in modeling and software development. At heart, I am a math nerd, receiving my master's in Mathematics at the University of Tennessee. My current areas of focus include creating useful embeddings for various applications such as AI Vision for industrial manufacturing as well as NLP for purchasing similarity recommendations.
 
-
+I am a pragmatic and results-oriented Data Scientist with over 10 years of experience delivering production-grade machine learning solutions across the automotive, finance, and education sectors. Passionate about solving real-world problems using statistical modeling, computer vision, and NLP. Proven ability to lead cross-functional projects, to design and implement robust MLOps pipelines using Databricks, Docker, and CI/CD best practices. Adept at working in collaborative environments and translating complex data into strategic business outcomes.

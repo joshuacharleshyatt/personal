@@ -22,7 +22,7 @@ format:
     toc: true
 ---
 
-I have over five years of experience working as a Data Scientist and many more years developing technical solutions for multinational companies. I have worked in the finance, automotive, and education industries applying my expertise in modeling and software development. My current areas of focus include creating useful embeddings for various applications such as AI Vision for industrial manufacturing as well as NLP for purchasing similarity recommendations.
+I am a pragmatic and results-oriented Data Scientist with over 10 years of experience delivering production-grade machine learning solutions across the automotive, finance, and education sectors. Passionate about solving real-world problems using statistical modeling, computer vision, and NLP. Proven ability to lead cross-functional projects, to design and implement robust MLOps pipelines using Databricks, Docker, and CI/CD best practices. Adept at working in collaborative environments and translating complex data into strategic business outcomes.
 
 
 ## Professional Experience
@@ -37,41 +37,39 @@ gantt
   section Work Experience
     Pellissippi State :done, w1, after e2, 2y
     Elavon            :done, w2, after w1, 3y
-    DENSO             :active, w3, after w2, 7y
+    DENSO             :active, w3, after w2, 8y
 ```
 
 ### Data Scientist III
 ::: {.callout-note icon=false}
 #### DENSO International America, INC. Maryville, TN	July 2018 – Present
 
-Leverage analytical and programming skills to extract insights from complex datasets to inform strategic decision-making.  Utilize statistical techniques, machine learning algorithms, and data visualization tools to interpret data and solve business problems.Responsibilities include: data cleaning, modeling, deployment, and presenting findings to executive stakeholders. 
-
-- Collaborated with MIT to map and analyze a significant portion of our supply chain network including conducting simulations (using Gurobi) and risk assessments based on GIS data to mitigate potential disruptions from events like earthquakes and floods.
-- Spearheaded development of segmentation-based neural network defect detection algorithms and web UI integration using Flask for multiple inspection robots, increasing quality through improved detection and reducing the number of inspectors.
-- Implemented asset monitoring system to leverage anomaly detection (auto-encoders) and forecasting techniques resulting in early detection of potential breakdowns that contribute to hundreds of thousands of dollars in savings.
-- Oversaw and guided Data Science Internships focused on Natural Language Processing (sentence embedding, UMAP, and NER), enhancing maintenance reporting, and integrating corporate purchases analysis to optimize procurement processes.
-- Proactively forecasted the peak of COVID cases (SEIR) 16 months in advance with a margin of error of only 8 days, which enabled management to anticipate labor shortages and plan accordingly for the height of the pandemic.
-- Established a robust Dev/Sec/Ops pipeline in GitLab, which automated testing and deployment of containerized machine learning applications with web APIs for improved efficiency and reliability.
--	Devised data collection strategies and developed solution roadmaps for 2 out of 3 key pillars for manufacturing: Predictive Maintenance and AI Vision-based inspection to meet the goals of operational excellence and quality assurance initiatives.
+- Collaborated with MIT to simulate and analyze supply chain resilience using Gurobi and GIS datasets, informing risk mitigation plans for natural disasters.
+- Developed a computer vision defect detection system using segmentation-based CNNs and convolutional autoencoders, deployed via Flask, containerized, and integrated for robotic process control using OPCUA, reducing defect rates and human inspection costs.
+- Led deployment of Databricks-based pipelines for time series analysis and predictive maintenance, leveraging Data Quality Pipelines, MLflow for experiment tracking, and Unity Catalog for data and model asset management.
+- Built NLP models using sentence embeddings and UMAP for clustering procurement descriptions, improving spend visibility and optimizing purchasing processes.
+- Led the Data Science Internship Program, handling hiring, project scoping, daily standups, and mentorship; delivered production-quality NLP and analytics solutions while establishing training resources and workflows for future prospects.
+- Accurately forecasted the COVID-19 case peak using an SEIR model 16 months in advance (8-day margin of error), enabling proactive workforce planning and minimizing disruption to manufacturing operations.
+- Established an Enterprise CI/CD pipeline using Azure Devops with Databricks, as well as GitLab with Docker to automate testing and deployment of ML applications with API endpoints
 :::
 
 ### Business Analyst II ← DBA ← Fraud Analyst
 ::: {.callout-note icon=false}
 #### Elavon Knoxville, TN Nov 2015 – July 2018
 
-Appropriately assigned high-risk fraud accounts to work queues, managed back-end relational databases, and provided analytical reporting needs to management.
+- Improved fraud detection accuracy and work queue triage, resulting in an additional $200K in annual fraud prevention.
+- Built a web scraping tool that halved account investigation time, with estimated annual savings between $25K–$50K.
+- Founded and led the Dedicated Solutions Team to automate reporting and data quality monitoring for internal business units.
+- Recognised with the Pinnacle Award (top 10% company-wide performance) in 2016.
 
-- Increased the efficiency of managing work queues by accurately identifying fraud, resulting in $200,000+ additional dollars saved compared to the prior 2-year average.
-- Developed an application utilizing web scraping that improved the efficiency of identifying and notating potentially risky accounts by 50%. Estimated savings of $25,000-$50,000 annually.
-- Directed the Dedicated Solutions Team, an initiative to redesign and simplify technological use within the business through automation and analytics. 
-- Awarded the Pinnacle Award for excellence in performance company wide (top 10% of employee performance), April 2016.
 :::
 
 ### Adjunct Mathematics Professor 
 ::: {.callout-note icon=false}
 #### Pellissippi State Community College Knoxville, TN Aug 2013 – Nov 2015
 
-Planned and held lectures, led in-class discussions, and graded assignments for Statistics, Algebra, and Business Calculus courses.
+- Taught Statistics, Algebra, and Business Calculus, supporting diverse learners and maintaining strong student outcomes.
+
 :::
 
 ## Education
@@ -85,45 +83,71 @@ Planned and held lectures, led in-class discussions, and graded assignments for 
 > GPA: 3.81/4.0  
 :::
 
-## Expertise
+
+## Skills
 ```{mermaid}
 %%{init: {'theme':'neutral'}}%%
 mindmap
   root((Skills))
-    Analytics
-      Natural Language Processing
+    Machine Learning and AI
+      Supervised & Unsupervised Leaening
       Anomaly Detection
-      Convolutional Neural Networks
-      Business Intelligence
-      Literate Progamming
-    Programming
+      Natural Language Processing
+      Computer Vision
+      Optimization & Simulation
+    Programming and Frameworks
       Python
-      GIT
+      Bash
       SQL
+      Spark
+      MLOps
+    Data & BI Tools
+      DOMO
+      Tableau
+      Data Modeling
+      Feature Engineering
+    Platforms and Infrastructure
+      Databricks
+      Gitlab CI/CD
+      Azure Cloud
+      Azure Devops
       Linux
-    Deployment
-      Docker
-      CI/CD
-      Automated Testing
+    Collaberation and Leadership
+      Agile and Scrum
+      Technical Mentorship
+      Cross Functional Communication/Leadership
 ```
 
+
 ::: {.callout-note appearance="simple" collapse=true}
-## Detailed Descriptions
-### Analytics
--	[X] Natural Language Processing (Word and Sentence embedding, Sentiment Analysis)
--	[X] Anomaly Detection (Auto-Encoders, One Class SVM, Local Outlier Factor, PCA)
--	[X] Convolutional Neural Networks (Auto-Encoders, U-net, Image Embedding)
--	[X] BI (Tableau, DOMO)
--	[X] Literate Programming (Jupyter Notebooks, Quarto, Codebraid)
+## Detailed Skills
 
-### Programming
--	[X] Python (NumPy, Pandas, gurobipy, GeoPandas, Scikit-learn, Tensorflow, SciPy, Flask, NLTK, SQLAlchemy, NetworkX, matplotlib, BaseMap, shapely, Beautiful Soup)
--	[X] GIT
-- [X]	SQL (Postgres, MSSQL, Cassandra, etc)
-- [X] Linux (including terminal)
+### Machine Learning & AI
+- [X] Supervised & Unsupervised Learning, Time Series Forecasting
+- [X] Anomaly Detection (Autoencoders, One-Class SVM, LOF, PCA)
+- [X] NLP (Sentence & Word Embeddings, NER, Sentiment Analysis)
+- [X] Computer Vision (CNNs, U-Net, Image Embeddings)
+- [X] Optimization & Simulation (Gurobi, SEIR Modeling)
 
-### Deployment
-- [X] Docker Containerization
-- [X]	CI/CD Pipeline (Gitlab Runner)
-- [X] Automated Testing (Pytest, Selenium Web Testing)
+### Programming & Frameworks
+- [X] Languages: Python (NumPy, Pandas, SciPy, matplotlib, NLTK, SQLAlchemy, Scikit-learn, TensorFlow, Beautiful Soup, UMAP, XGBoost), SQL, Bash, Spark
+- [X] MLOps & DevOps: Git, CI/CD, Docker, MLflow, Pytest, Selenium
+
+### Data & BI Tools
+- [X] SQL (PostgreSQL, MSSQL, Cassandra)
+- [X] DOMO, Tableau, Jupyter Notebooks, Quarto
+- [X] Data Modeling, Feature Engineering, Data Wrangling
+
+### Platforms & Infrastructure
+- [X] Databricks: Jobs, Pipelines, Workspace Administration, Repos, Unity Catalog, Vector Stores
+- [X] GitLab (Runner & Pipelines)
+- [X] Azure Cloud, Docker (Containerization & Deployment)
+- [X] Azure Devops, GitLab Devops, Git Pages
+- [X] Linux (Command Line, Scripting), REST API Deployment and Web Hosting
+
+### Collaboration & Leadership
+- [X] Agile & Scrum Environments
+- [X] Technical Mentorship & Training Programs (Self Led and Instructor Led)
+- [X] Cross-Functional Communication (Business, Engineering, Executives)
+- [X] Documentation & Reproducibility Practices
 :::

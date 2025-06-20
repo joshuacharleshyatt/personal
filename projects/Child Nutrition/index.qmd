@@ -1,5 +1,0 @@
----
-title: Child Malnutrition Dashboard
----
-
-# Dashboard

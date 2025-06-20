@@ -2,7 +2,7 @@
 date: '2024-03-18'
 title: "COVID Reflection"
 categories: [Paper, Python, Dataviz, COVID]
-image: "/assets/Iris_pca.png"
+image: "/assets/covid_predictions.png"
 title-block-banner: false
 format:
   html:

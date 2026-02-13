@@ -22,7 +22,7 @@ format:
     toc: true
 ---
 
-I am a pragmatic and results-oriented Data Scientist with over 10 years of experience delivering production-grade machine learning solutions across the automotive, finance, and education sectors. Passionate about solving real-world problems using statistical modeling, computer vision, and NLP. Proven ability to lead cross-functional projects, to design and implement robust MLOps pipelines using Databricks, Docker, and CI/CD best practices. Adept at working in collaborative environments and translating complex data into strategic business outcomes.
+I am a pragmatic and results-oriented Data Scientist with over 10 years of experience across the automotive, finance, and education sectors, delivering production-grade machine learning solutions. Passionate about solving real-world problems using statistical modeling, computer vision, and NLP. Proven ability to lead cross-functional projects, to design and implement robust MLOps pipelines using Databricks, Docker, and CI/CD best practices. I'm adept at working in collaborative environments and translating complex data into strategic business outcomes.
 
 
 ## Professional Experience
@@ -32,25 +32,28 @@ gantt
   dateFormat YYYY-MM
   axisformat %y
   section Education
-    Bachelor          :done, e1, 2007-08, 4y
-    Masters           :done, e2, after e1, 2y
+    Bachelor          		:done, e1, 2007-08, 4y
+    Masters           		:done, e2, after e1, 2y
   section Work Experience
-    Pellissippi State :done, w1, after e2, 2y
-    Elavon            :done, w2, after w1, 3y
-    DENSO             :active, w3, after w2, 8y
+  	University of Tennessee :done, w0, after e1, 2y
+    Pellissippi State 		:done, w1, after e2, 2y
+    Elavon            		:done, w2, after w1, 3y
+    DENSO             		:active, w3, after w2, 8.5y
 ```
 
 ### Data Scientist III
 ::: {.callout-note icon=false}
 #### DENSO International America, INC. Maryville, TN	July 2018 – Present
 
-- Collaborated with MIT to simulate and analyze supply chain resilience using Gurobi and GIS datasets, informing risk mitigation plans for natural disasters.
-- Developed a computer vision defect detection system using segmentation-based CNNs and convolutional autoencoders, deployed via Flask, containerized, and integrated for robotic process control using OPCUA, reducing defect rates and human inspection costs.
-- Led deployment of Databricks-based pipelines for time series analysis and predictive maintenance, leveraging Data Quality Pipelines, MLflow for experiment tracking, and Unity Catalog for data and model asset management.
-- Built NLP models using sentence embeddings and UMAP for clustering procurement descriptions, improving spend visibility and optimizing purchasing processes.
-- Led the Data Science Internship Program, handling hiring, project scoping, daily standups, and mentorship; delivered production-quality NLP and analytics solutions while establishing training resources and workflows for future prospects.
-- Accurately forecasted the COVID-19 case peak using an SEIR model 16 months in advance (8-day margin of error), enabling proactive workforce planning and minimizing disruption to manufacturing operations.
-- Established an Enterprise CI/CD pipeline using Azure Devops with Databricks, as well as GitLab with Docker to automate testing and deployment of ML applications with API endpoints
+ - Architected and deployed predictive maintenance systems for critical manufacturing components using vibration analytics and time-to-failure modeling, mitigating ~396 hours of annual downtime and delivering $178K+ in documented cost avoidance.
+ - Built end-to-end computer vision defect detection pipelines using segmentation-based CNNs and convolutional autoencoders; deployed containerized Flask APIs integrated with robotic process control (OPCUA), contributing to $1.2M+ in operational impact.
+ - Led enterprise Databricks implementation for time-series analytics and ML workloads, leveraging MLflow, Unity Catalog, and automated data quality pipelines for governed model lifecycle management.
+ - Designed and implemented CI/CD pipelines (Azure DevOps, GitLab) to automate testing, validation, containerization, and deployment of ML models and API endpoints to production environments.
+ - Developed NLP solutions using sentence embeddings and UMAP clustering to structure unstandardized procurement data, improving spend visibility and identifying $75K+ in cost avoidance opportunities.
+ - Contributed to development of a tariff rules engine supporting real-time and scenario-based analysis, enabling data-driven strategy with reported impact exceeding $140M.
+ - Collaborated with MIT to model supply chain resilience using Gurobi optimization and GIS datasets, informing disaster risk mitigation and scenario planning.
+ - Architected and deployed an Enterprise CI/CD pipeline with Azure Devops and Databricks, to automate testing and deployment of ML applications
+ - Mentored and led junior data scientists in production ML delivery, establishing standardized experiment tracking, CI/CD workflows, and deployment practices.
 :::
 
 ### Business Analyst II ← DBA ← Fraud Analyst
@@ -101,7 +104,7 @@ mindmap
       SQL
       Spark
       MLOps
-    Data & BI Tools
+    Data and BI Tools
       DOMO
       Tableau
       Data Modeling
@@ -125,13 +128,14 @@ mindmap
 ### Machine Learning & AI
 - [X] Supervised & Unsupervised Learning, Time Series Forecasting
 - [X] Anomaly Detection (Autoencoders, One-Class SVM, LOF, PCA)
-- [X] NLP (Sentence & Word Embeddings, NER, Sentiment Analysis)
+- [X] Natural Language Processing (Sentence & Word Embeddings, NER, Sentiment Analysis)
 - [X] Computer Vision (CNNs, U-Net, Image Embeddings)
-- [X] Optimization & Simulation (Gurobi, SEIR Modeling)
+- [X] Optimization & Simulation (Gurobi, SEIR & Scenario Modeling)
 
 ### Programming & Frameworks
-- [X] Languages: Python (NumPy, Pandas, SciPy, matplotlib, NLTK, SQLAlchemy, Scikit-learn, TensorFlow, Beautiful Soup, UMAP, XGBoost), SQL, Bash, Spark
-- [X] MLOps & DevOps: Git, CI/CD, Docker, MLflow, Pytest, Selenium
+- [X] Python (NumPy, Pandas, SciPy, NLTK, SQLAlchemy, Scikit-learn, TensorFlow, UMAP, XGBoost)
+- [X] SQL, Bash, Spark (PySpark)
+- [X] MLOps & DevOps (Git, CI/CD, Docker, MLflow, Pytest)
 
 ### Data & BI Tools
 - [X] SQL (PostgreSQL, MSSQL, Cassandra)
@@ -139,15 +143,14 @@ mindmap
 - [X] Data Modeling, Feature Engineering, Data Wrangling
 
 ### Platforms & Infrastructure
-- [X] Databricks: Jobs, Pipelines, Workspace Administration, Repos, Unity Catalog, Vector Stores
-- [X] GitLab (Runner & Pipelines)
-- [X] Azure Cloud, Docker (Containerization & Deployment)
-- [X] Azure Devops, GitLab Devops, Git Pages
-- [X] Linux (Command Line, Scripting), REST API Deployment and Web Hosting
+- [X] Databricks (Jobs, Pipelines, Workspace Administration, Repos, Unity Catalog, Vector Stores, Workspace Admin)
+- [X] GitLab (Runners, CI/CD Pipelines)
+- [X] Azure Cloud & Azure DevOps
+- [X] Linux (Command Line, Scripting), REST API Deployment and Model Serving
 
 ### Collaboration & Leadership
-- [X] Agile & Scrum Environments
-- [X] Technical Mentorship & Training Programs (Self Led and Instructor Led)
-- [X] Cross-Functional Communication (Business, Engineering, Executives)
-- [X] Documentation & Reproducibility Practices
+- [X] Agile & Scrum Delivery
+- [X] Technical Mentorship & Curriculum Development
+- [X] Cross-Functional Communication (Business, Engineering, Executives Stakeholders)
+- [X] Documentation & Reproducibility & ML Governance Practices
 :::

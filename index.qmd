@@ -21,5 +21,6 @@ comments: false
 
 ## About Me
 
+I’m a **Data Scientist with over 10 years of experience** building practical, production-ready solutions for multinational organizations. I’ve worked across the **finance, automotive, and education** industries, combining modeling, software development, and applied machine learning to solve real-world problems and deliver measurable business value.
 
-I am a pragmatic and results-oriented Data Scientist with over 10 years of experience delivering production-grade machine learning solutions across the automotive, finance, and education sectors. Passionate about solving real-world problems using statistical modeling, computer vision, and NLP. Proven ability to lead cross-functional projects, to design and implement robust MLOps pipelines using Databricks, Docker, and CI/CD best practices. Adept at working in collaborative environments and translating complex data into strategic business outcomes.
+At heart, I’m a **math nerd** and enjoy turning solid theory into useful, reliable systems. Lately, my work has focused on creating **high-quality embeddings** for applied AI, including **computer vision for industrial manufacturing** and **NLP-based similarity and recommendation models** that support smarter purchasing and decision-making.

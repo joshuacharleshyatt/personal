@@ -1,0 +1,698 @@
+pandoc 
+
+  to: html
+  output-file: qualifications.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  about:
+    template: solana
+    image-shape: round
+    image-width: 0em
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: PDF
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  
+
+Output created: docs/qualifications.html
+
+
+[1m[34mTerminating existing preview server....[39m[22m
+[1m[34mDONE
+[39m[22m
+
+[1m[34mPreparing to preview[39m[22m
+
+[1m[34m[1/2] projects/Template/index.qmd[39m[22m
+
+[1m[34m[2/2] projects.qmd[39m[22m
+
+
+
+Watching files for changes
+
+Browse at 
+http://localhost:4663/qualifications.html
+
+GET: /qualifications.html
+
+pandoc 
+
+  to: html
+  output-file: qualifications.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  about:
+    template: solana
+    image-shape: round
+    image-width: 0em
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: PDF
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  
+
+GET: /qualifications.html
+
+pandoc 
+
+  to: html
+  output-file: qualifications.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  about:
+    template: solana
+    image-shape: round
+    image-width: 0em
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: PDF
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  
+
+GET: /qualifications.html
+
+pandoc 
+
+  to: html
+  output-file: qualifications.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  about:
+    template: solana
+    image-shape: round
+    image-width: 0em
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: PDF
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  
+
+GET: /qualifications.html
+
+pandoc 
+
+  to: html
+  output-file: qualifications.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  about:
+    template: solana
+    image-shape: round
+    image-width: 0em
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: PDF
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  
+
+GET: /qualifications.html
+
+pandoc 
+
+  to: html
+  output-file: qualifications.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  about:
+    template: solana
+    image-shape: round
+    image-width: 0em
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: PDF
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  
+
+GET: /qualifications.html
+
+pandoc 
+
+  to: html
+  output-file: qualifications.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  about:
+    template: solana
+    image-shape: round
+    image-width: 0em
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: PDF
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  
+
+GET: /qualifications.html
+
+pandoc 
+
+  to: html
+  output-file: qualifications.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  about:
+    template: solana
+    image-shape: round
+    image-width: 0em
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: PDF
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  
+
+GET: /qualifications.html
+
+pandoc 
+
+  to: html
+  output-file: qualifications.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  about:
+    template: solana
+    image-shape: round
+    image-width: 0em
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: PDF
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  
+
+GET: /qualifications.html
+
+pandoc 
+
+  to: html
+  output-file: qualifications.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  about:
+    template: solana
+    image-shape: round
+    image-width: 0em
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: PDF
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  
+
+GET: /qualifications.html
+
+GET: /projects.html
+
+GET: /projects/COVID/
+
+GET: /projects.html
+
+GET: /
+
+pandoc 
+
+  to: html
+  output-file: index.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: false
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  image: assets/profile.jpg
+  about:
+    template: jolla
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: Resume
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  comments: false
+  
+
+GET: /
+
+pandoc 
+
+  to: html
+  output-file: index.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: false
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  image: assets/profile.jpg
+  about:
+    template: jolla
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: Resume
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  comments: false
+  
+
+GET: /
+
+GET: /qualifications.html
+
+GET: /qualifications.html
+
+pandoc 
+
+  to: html
+  output-file: index.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: false
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  image: assets/profile.jpg
+  about:
+    template: jolla
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: Resume
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  comments: false
+  
+
+GET: /
+
+GET: /projects.html
+
+GET: /projects/Template/
+
+GET: /assets/Iris_EDA.html
+
+GET: /projects/Template/
+
+GET: /qualifications.html
+
+GET: /qualifications.html
+
+GET: /qualifications.html
+
+GET: /
+
+GET: /
+
+pandoc 
+
+  to: html
+  output-file: qualifications.html
+  standalone: true
+  title-prefix: Joshua Hyatt
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  
+
+metadata
+
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  theme:
+    light: flatly
+    dark: darkly
+  title: Joshua Hyatt
+  about:
+    template: solana
+    image-shape: round
+    image-width: 0em
+    links:
+      - text: LinkedIn
+        icon: linkedin
+        url: https://www.linkedin.com/in/joshuachyatt/
+      - text: GitHub
+        icon: github
+        url: https://github.com/joshuacharleshyatt
+      - text: Email
+        icon: envelope
+        url: mailto:joshuacharleshyatt@gmail.com
+      - text: PDF
+        icon: file-earmark-pdf
+        href: https://joshuacharleshyatt.github.io/personal/assets/Joshua-Hyatt-Resume.pdf
+  
+
+GET: /qualifications.html
+
+GET: /
+
+GET: /qualifications.html
+
